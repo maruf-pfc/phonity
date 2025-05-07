@@ -1,0 +1,47 @@
+# .github/workflows/ci.yml
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔄 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: 📦 Install server dependencies
+        run: |
+          cd server
+          npm install
+
+      - name: 📦 Install client dependencies
+        run: |
+          cd client
+          npm install
+
+      - name: 🧹 Lint server
+        run: |
+          cd server
+          npm run lint
+
+      # - name: 🧹 Lint client
+      #   run: |
+      #     cd client
+      #     npm run lint
+
+      - name: ✅ Test server
+        run: |
+          cd server
+          npm test
+
+      # - name: ✅ Test client
+      #   run: |
+      #     cd client
+      #     npm test
