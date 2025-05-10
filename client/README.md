@@ -1,4 +1,4 @@
-# 🛍️ Stylique E-Commerce Client (Frontend)
+# 🛍️ Phonity E-Commerce Client (Frontend)
 
 This is the **React-based frontend** for the E-Commerce platform. It supports both **user-facing features** (like product browsing and ordering) and **admin functionalities** (like managing users, orders, and products).
 
@@ -36,7 +36,7 @@ This is the **React-based frontend** for the E-Commerce platform. It supports bo
 ### 🔓 User Features
 
 - Register and Login (with role-based access)
-- Browse products and filter by gender or collection
+- Browse products and filter
 - View detailed product pages
 - Add to cart and checkout via PayPal
 - View past orders and order details
