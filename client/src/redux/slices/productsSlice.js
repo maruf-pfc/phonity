@@ -8,30 +8,26 @@ const USER_TOKEN = `Bearer ${localStorage.getItem("userToken")}`;
 export const fetchProductsByFilters = createAsyncThunk(
   "products/fetchByFilters",
   async ({
-    collection,
-    size,
+    storage,
     color,
-    gender,
+    ram,
     minPrice,
     maxPrice,
     sortBy,
     search,
     category,
-    material,
     brand,
     limit,
   }) => {
     const query = new URLSearchParams();
-    if (collection) query.append("collection", collection);
-    if (size) query.append("size", size);
+    if (storage) query.append("storage", storage);
     if (color) query.append("color", color);
-    if (gender) query.append("gender", gender);
+    if (ram) query.append("ram", ram);
     if (minPrice) query.append("minPrice", minPrice);
     if (maxPrice) query.append("maxPrice", maxPrice);
     if (sortBy) query.append("sortBy", sortBy);
     if (search) query.append("search", search);
     if (category) query.append("category", category);
-    if (material) query.append("material", material);
     if (brand) query.append("brand", brand);
     if (limit) query.append("limit", limit);
     const response = await axios.get(
@@ -89,17 +85,14 @@ const productsSlice = createSlice({
     loading: false,
     error: null,
     filters: {
-      category: "",
-      size: "",
+      storage: "",
       color: "",
-      gender: "",
+      ram: "",
       brand: "",
       minPrice: "",
       maxPrice: "",
       sortBy: "",
       search: "",
-      material: "",
-      collection: "",
     },
   },
   reducers: {
@@ -111,17 +104,14 @@ const productsSlice = createSlice({
     },
     clearFilers: (state) => {
       state.filters = {
-        category: "",
-        size: "",
+        storage: "",
         color: "",
-        gender: "",
+        ram: "",
         brand: "",
         minPrice: "",
         maxPrice: "",
         sortBy: "",
         search: "",
-        material: "",
-        collection: "",
       };
     },
   },
