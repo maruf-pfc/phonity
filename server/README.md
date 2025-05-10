@@ -1,10 +1,10 @@
-# Stylique E-Commerce API
+# Phonity E-Commerce API
 
-Stylique is a comprehensive RESTful API for an e-commerce platform built with Node.js, Express, and MongoDB. It provides a robust backend for managing products, users, shopping carts, orders, and more.
+Phonity is a comprehensive RESTful API for an e-commerce platform with Community feature built with Node.js, Express, and MongoDB. It provides a robust backend for managing products, users, shopping carts, orders, and more.
 
 ## 📋 Table of Contents
 
-- [Stylique E-Commerce API](#stylique-e-commerce-api)
+- [Phonity E-Commerce API](#phonity-e-commerce-api)
   - [📋 Table of Contents](#-table-of-contents)
   - [✨ Features](#-features)
   - [🛠️ Tech Stack](#️-tech-stack)
@@ -75,8 +75,8 @@ Stylique is a comprehensive RESTful API for an e-commerce platform built with No
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/maruf-pfc/stylique.git
-   cd stylique
+   git clone https://github.com/maruf-pfc/phonity.git
+   cd phonity
    cd server
    ```
 
@@ -107,8 +107,7 @@ pnpm start
 
 Create a `.env` file in the root directory with the following variables:
 
-```
-
+```txt
 # Server
 
 PORT=5000
@@ -116,7 +115,7 @@ NODE_ENV=development
 
 # MongoDB
 
-MONGO_URI=mongodb://localhost:27017/stylique
+MONGO_URI=mongodb://localhost:27017/phonity
 
 # JWT
 
@@ -132,9 +131,9 @@ CLOUDINARY_API_SECRET=your_api_secret
 
 ## 📚 API Documentation
 
-Stylique comes with built-in Swagger documentation. After starting the server, access the interactive API documentation at:
+phonity comes with built-in Swagger documentation. After starting the server, access the interactive API documentation at:
 
-```
+```txt
 [http://localhost:5000/api-docs](http://localhost:5000/api-docs)
 ```
 
@@ -254,7 +253,7 @@ pnpm dev
 ## 📂 Project Structure
 
 ```plaintext
-stylique/
+server/
 ├── configs/           # Configuration files
 ├── controllers/       # Route controllers
 ├── middlewares/       # Custom middlewares

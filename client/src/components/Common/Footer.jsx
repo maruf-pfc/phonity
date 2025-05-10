@@ -15,7 +15,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
             <Link
-              href="/"
+              to="/"
               className="flex items-center gap-2 text-xl font-bold mb-4"
             >
               <Phone className="h-5 w-5" />
@@ -81,7 +81,7 @@ const Footer = () => {
             <h3 className="font-bold text-lg mb-4">Customer Service</h3>
             <ul className="space-y-2 text-gray-400">
               <li>
-                <Link to="#" className="hover:text-white">
+                <Link to="/contact-us" className="hover:text-white">
                   Contact Us
                 </Link>
               </li>

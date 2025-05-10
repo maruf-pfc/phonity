@@ -1,20 +1,19 @@
-# Stylique 🛍️
+# Phonity 📱
 
-Stylique is a full-stack e-commerce web application designed to deliver a seamless online shopping experience. Built with modern web technologies, it includes both a robust RESTful API backend and a dynamic, responsive frontend.
+Phonity is a full-stack e-commerce web application designed to deliver a seamless online shopping experience. Built with modern web technologies, it includes both a robust RESTful API backend and a dynamic, responsive frontend.
 
 ## 📁 Project Structure
 
 ```tree
-stylique/
+phonity/
 ├── client/    # Frontend (React, Tailwind CSS, JavaScript)
 ├── server/    # Backend (Node.js, Express, MongoDB)
 └── README.md  # Root readme
-
 ```
 
 ## 🌐 Live Demo
 
-Check out the live demo of Stylique at [stylique.vercel.app](https://stylique.vercel.app).
+Check out the live demo of Phonity at [phonity.vercel.app](https://phonity.vercel.app).
 
 ## 📦 Tech Stack
 
