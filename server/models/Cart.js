@@ -16,10 +16,13 @@ const cartItemSchema = new mongoose.Schema(
     price: {
       type: String,
     },
-    size: {
+    color: {
       type: String,
     },
-    color: {
+    ram: {
+      type: String,
+    },
+    storage: {
       type: String,
     },
     quantity: {
