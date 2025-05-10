@@ -16,16 +16,14 @@ const getAllProducts = async (req, res) => {
 const getAllFilteredProducts = async (req, res) => {
   try {
     const {
-      collection,
-      size,
+      storage,
       color,
-      gender,
+      ram,
       minPrice,
       maxPrice,
       sortBy,
       search,
       category,
-      material,
       brand,
       limit,
     } = req.query;
@@ -33,33 +31,21 @@ const getAllFilteredProducts = async (req, res) => {
     let query = {};
 
     // filter logic
-    if (collection && collection.toLocaleLowerCase() !== "all") {
-      query.collection = collection;
-    }
     if (category && category.toLocaleLowerCase() !== "all") {
       query.category = category;
     }
-
-    if (material && material.toLocaleLowerCase() !== "all") {
-      query.material = { $in: material.split(",") };
-    }
-
     if (brand && brand.toLocaleLowerCase() !== "all") {
       query.brand = { $in: brand.split(",") };
     }
-
-    if (size && size.toLocaleLowerCase() !== "all") {
+    if (ram && ram.toLocaleLowerCase() !== "all") {
+      query.ram = { $in: ram.split(",") };
+    }
+    if (storage && size.toLocaleLowerCase() !== "all") {
       query.sizes = { $in: size.split(",") };
     }
-
     if (color && color.toLocaleLowerCase() !== "all") {
       query.colors = { $in: [color] };
     }
-
-    if (gender) {
-      query.gender = gender;
-    }
-
     if (minPrice || maxPrice) {
       query.price = {};
       if (minPrice) {
@@ -129,9 +115,15 @@ const getSimilarProducts = async (req, res) => {
 
     const similarProducts = await Product.find({
       _id: { $ne: id }, // Exclude the current product
-      gender: product.gender,
       category: product.category,
     }).limit(4); // Limit to 4 similar products
+
+    if (similarProducts.length === 0) {
+      return res.status(404).json({
+        status: "fail",
+        message: "No similar products found",
+      });
+    }
 
     res.json({
       status: "success",
@@ -207,20 +199,18 @@ const createNewProduct = async (req, res) => {
       price,
       discountPrice,
       countInStock,
+      sku,
       category,
       brand,
-      sizes,
       colors,
-      collections,
-      material,
-      gender,
+      ram,
+      storage,
       images,
       isFeatured,
       isPublished,
       tags,
       dimensions,
       weight,
-      sku,
     } = req.body;
 
     const product = new Product({
@@ -229,20 +219,18 @@ const createNewProduct = async (req, res) => {
       price,
       discountPrice,
       countInStock,
+      sku,
       category,
       brand,
-      sizes,
       colors,
-      collections,
-      material,
-      gender,
+      ram,
+      storage,
       images,
       isFeatured,
       isPublished,
       tags,
       dimensions,
       weight,
-      sku,
       user: req.user._id, // Referencing the user who created the product (admin)
     });
 
@@ -289,20 +277,19 @@ const updateProduct = async (req, res) => {
       price,
       discountPrice,
       countInStock,
+      sku,
       category,
       brand,
-      sizes,
       colors,
-      collections,
-      material,
-      gender,
+      ram,
+      storage,
       images,
       isFeatured,
       isPublished,
       tags,
       dimensions,
       weight,
-      sku,
+      rating,
     } = req.body;
 
     // find product by id
@@ -315,13 +302,12 @@ const updateProduct = async (req, res) => {
       product.price = price || product.price;
       product.discountPrice = discountPrice || product.discountPrice;
       product.countInStock = countInStock || product.countInStock;
+      product.sku = sku || product.sku;
       product.category = category || product.category;
       product.brand = brand || product.brand;
-      product.sizes = sizes || product.sizes;
       product.colors = colors || product.colors;
-      product.collections = collections || product.collections;
-      product.material = material || product.material;
-      product.gender = gender || product.gender;
+      product.ram = ram || product.ram;
+      product.storage = storage || product.storage;
       product.images = images || product.images;
       product.isFeatured =
         isFeatured !== undefined ? isFeatured : product.isFeatured;
@@ -330,7 +316,7 @@ const updateProduct = async (req, res) => {
       product.tags = tags || product.tags;
       product.dimensions = dimensions || product.dimensions;
       product.weight = weight || product.weight;
-      product.sku = sku || product.sku;
+      product.rating = rating || product.rating;
 
       // save the updated product
       const updatedProduct = await product.save();

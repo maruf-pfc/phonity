@@ -1,6 +1,4 @@
 import React from "react";
-import mensCollectionImage from "../../assets/mens-collection.webp";
-import womensCollectionImage from "../../assets/womens-collection.webp";
 import { Link } from "react-router-dom";
 
 const GenderCollectionSection = () => {
@@ -10,7 +8,7 @@ const GenderCollectionSection = () => {
         {/* Women's Collection */}
         <div className="relative flex-1">
           <img
-            src={womensCollectionImage}
+            src=""
             alt="Women's Collection"
             className="w-full h-[700px] object-cover"
           />
@@ -29,7 +27,7 @@ const GenderCollectionSection = () => {
         {/* Men's Collection */}
         <div className="relative flex-1">
           <img
-            src={mensCollectionImage}
+            src=""
             alt="Men's Collection"
             className="w-full h-[700px] object-cover"
           />

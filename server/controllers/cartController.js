@@ -12,7 +12,7 @@ const getCart = async (userId, guestId) => {
 };
 
 const addToCart = async (req, res) => {
-  const { productId, quantity, size, color, guestId, userId } = req.body;
+  const { productId, quantity, storage, color, ram, guestId, userId } = req.body;
   try {
     const product = await Product.findById(productId);
     if (!product) {
@@ -27,8 +27,9 @@ const addToCart = async (req, res) => {
       const productIndex = cart.products.findIndex(
         (item) =>
           item.productId.toString() === productId &&
-          item.size === size &&
-          item.color === color
+          item.storage === storage &&
+          item.color === color &&
+          item.ram === ram
       );
 
       if (productIndex > -1) {
@@ -41,8 +42,9 @@ const addToCart = async (req, res) => {
           name: product.name,
           image: product.images[0].url,
           price: product.price,
-          size,
+          storage,
           color,
+          ram,
           quantity,
         });
       }
@@ -64,8 +66,9 @@ const addToCart = async (req, res) => {
             name: product.name,
             image: product.images[0].url,
             price: product.price,
-            size,
+            storage,
             color,
+            ram,
             quantity,
           },
         ],
@@ -81,7 +84,7 @@ const addToCart = async (req, res) => {
 };
 
 const updateProductQuantity = async (req, res) => {
-  const { productId, quantity, size, color, guestId, userId } = req.body;
+  const { productId, quantity, storage, color, ram, guestId, userId } = req.body;
 
   try {
     let cart = await getCart(userId, guestId);
@@ -92,8 +95,9 @@ const updateProductQuantity = async (req, res) => {
     const productIndex = cart.products.findIndex(
       (item) =>
         item.productId.toString() === productId &&
-        item.size === size &&
-        item.color === color
+        item.storage === storage &&
+        item.color === color &&
+        item.ram === ram
     );
     if (productIndex > -1) {
       // update the quantity
@@ -119,7 +123,7 @@ const updateProductQuantity = async (req, res) => {
 };
 
 const removeFromCart = async (req, res) => {
-  const { productId, size, color, guestId, userId } = req.body;
+  const { productId, storage, color, ram, guestId, userId } = req.body;
 
   try {
     let cart = await getCart(userId, guestId);
@@ -130,8 +134,9 @@ const removeFromCart = async (req, res) => {
     const productIndex = cart.products.findIndex(
       (item) =>
         item.productId.toString() === productId &&
-        item.size === size &&
-        item.color === color
+        item.storage === storage &&
+        item.color === color &&
+        item.ram === ram
     );
     if (productIndex > -1) {
       // remove the product
@@ -190,8 +195,9 @@ const mergeGuestCart = async (req, res) => {
           const productIndex = userCart.products.findIndex(
             (product) =>
               product.productId.toString() === item.productId.toString() &&
-              product.size === item.size &&
-              product.color === item.color
+              product.storage === item.storage &&
+              product.color === item.color &&
+              product.ram === item.ram
           );
           if (productIndex > -1) {
             userCart.products[productIndex].quantity += item.quantity;
