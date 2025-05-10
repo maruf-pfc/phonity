@@ -22,21 +22,27 @@ const seedData = async () => {
     const adminUsers = await User.create([
       {
         name: "Maruf",
-        email: "maruf@stylique.com",
+        email: "maruf@phonity.com",
         password: "123456",
         role: "admin",
       },
       {
         name: "Sohel",
-        email: "sohel@stylique.com",
+        email: "sohel@phonity.com",
         password: "123456",
         role: "admin",
       },
       {
         name: "Moriam",
-        email: "moriam@stylique.com",
+        email: "moriam@phonity.com",
         password: "123456",
         role: "admin",
+      },
+      {
+        name: "Akib",
+        email: "akib@phonity.com",
+        password: "123456",
+        role: "customer",
       },
     ]);
 
