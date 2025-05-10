@@ -6,7 +6,7 @@ const slides = [
   {
     id: 1,
     image:
-      "https://www.shutterstock.com/image-vector/online-store-via-mobile-phone-600nw-1841495218.jpg",
+      "https://i.ibb.co.com/JF2PGhD1/377541012-f2ed247d-c525-4358-81c5-aa1d7d257c69.jpg",
     title: "Discover the Latest Smartphones",
     description:
       "Experience cutting-edge technology with our newest collection of premium smartphones.",
@@ -16,7 +16,7 @@ const slides = [
   {
     id: 2,
     image:
-      "https://t3.ftcdn.net/jpg/02/62/18/46/360_F_262184611_bXhmboL9oE6k2ILu4qXxNWFhNJCEbTn2.jpg",
+      "https://i.ibb.co.com/238xM4w2/freepik-the-style-is-candid-image-photography-with-natural-17118.png",
     title: "Exclusive Deals on Accessories",
     description:
       "Enhance your device experience with our premium accessories at special prices.",
@@ -108,7 +108,7 @@ const Hero = () => {
               alt={slide.title}
               className="object-cover w-[100%] h-[200px] md:h-[500px]"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent flex items-center">
+            {/* <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent flex items-center">
               <div className="container mx-auto px-4">
                 <div className="max-w-lg text-white">
                   <h1 className="text-3xl md:text-5xl font-bold mb-4">
@@ -123,7 +123,7 @@ const Hero = () => {
                   </a>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         ))}
 

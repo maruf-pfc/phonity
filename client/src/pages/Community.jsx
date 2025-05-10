@@ -9,17 +9,17 @@ export default function CommunityPage() {
 
   // Sample user data
   const currentUser = {
-    name: "John Doe",
-    username: "@johndoe",
+    name: "Md Sohel",
+    username: "@sohel",
     avatar:
-      "https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg",
+      "https://scontent.fdac14-1.fna.fbcdn.net/v/t39.30808-6/492399333_644063088616705_1572330640017402416_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGM4SpcDRMEDI7b5XdmZXpDcp260USidYZynbrRRKJ1hmDvegkG6-TKYoE7Rwa0aBnYzDZk7GD2_iq-S7mxbWze&_nc_ohc=g1E-Z43c1PEQ7kNvwEfDLbl&_nc_oc=Adn_e6g1uB3dVU2fQUnytVJlByfwo_coYzhQ8YriDU_t_0i_OEkcaEJrWXOdXc0yZcQ&_nc_zt=23&_nc_ht=scontent.fdac14-1.fna&_nc_gid=ffxniIeoivvk09Bk2vbiFQ&oh=00_AfIIgFqc_rc_K9eWErDV_74hdUeeISlFnzpvTqIjNkvw6A&oe=68257E74",
     bio: "Tech enthusiast and smartphone reviewer. I love testing the latest gadgets and sharing my experiences with the community.",
-    followers: 1243,
-    following: 567,
-    posts: 89,
-    joined: "January 2023",
-    location: "New York, USA",
-    website: "johndoe.tech",
+    followers: 43,
+    following: 67,
+    posts: 9,
+    joined: "January 2025",
+    location: "Dhaka, Bangladesh",
+    website: "sohel.tech",
     interests: ["Smartphones", "Wearables", "Photography", "Gaming"],
   };
 
@@ -207,7 +207,7 @@ export default function CommunityPage() {
                         className="hidden"
                       />
                     </label>
-                    <button
+                    {/* <button
                       type="button"
                       className="text-gray-500 hover:text-blue-600 flex items-center"
                     >
@@ -234,7 +234,7 @@ export default function CommunityPage() {
                         ></rect>
                       </svg>
                       <span>Video</span>
-                    </button>
+                    </button> */}
                   </div>
                   <button
                     type="submit"
@@ -391,7 +391,7 @@ export default function CommunityPage() {
                 </button>
 
                 <img
-                  src="https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg"
+                  src="https://scontent.fdac14-1.fna.fbcdn.net/v/t39.30808-6/492399333_644063088616705_1572330640017402416_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGM4SpcDRMEDI7b5XdmZXpDcp260USidYZynbrRRKJ1hmDvegkG6-TKYoE7Rwa0aBnYzDZk7GD2_iq-S7mxbWze&_nc_ohc=g1E-Z43c1PEQ7kNvwEfDLbl&_nc_oc=Adn_e6g1uB3dVU2fQUnytVJlByfwo_coYzhQ8YriDU_t_0i_OEkcaEJrWXOdXc0yZcQ&_nc_zt=23&_nc_ht=scontent.fdac14-1.fna&_nc_gid=ffxniIeoivvk09Bk2vbiFQ&oh=00_AfIIgFqc_rc_K9eWErDV_74hdUeeISlFnzpvTqIjNkvw6A&oe=68257E74"
                   alt="User profile"
                   className="w-8 h-8 rounded-full cursor-pointer object-cover"
                 />

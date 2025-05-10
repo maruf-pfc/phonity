@@ -9,6 +9,7 @@ import FeaturedSection from "../components/Products/FeaturedSection";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductsByFilters } from "../redux/slices/productsSlice";
 import axios from "axios";
+import SearchPhone from "../components/Products/SearchPhone";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const Home = () => {
   return (
     <div>
       <Hero />
-
+    <SearchPhone />
       <GenderCollectionSection />
       <NewArrivals />
 

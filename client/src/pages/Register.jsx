@@ -40,8 +40,8 @@ const Register = () => {
     setPassword("");
   };
   return (
-    <div className="flex">
-      <div className="w-full md:w-1/2 flex flex-col justify-center items-center p-8 md:p-12">
+    <div className="container justify-between mx-auto flex">
+      <div className="w-full md:w-1/2 flex flex-col py-8 md:py-12">
         <form className="w-full max-w-md bg-white p-8 rounded-lg border shadow-sm">
           <div className="flex justify-center mb-6">
             <h2 className="text-xl font-medium">Phonity</h2>
@@ -118,7 +118,7 @@ const Register = () => {
           <img
             src={register}
             alt="Login to Account"
-            className="h-[750px] w-full object-cover"
+            className="h-[750px] w-full"
           />
         </div>
       </div>
