@@ -118,7 +118,7 @@ export default function CommunityPage() {
           Phonity Community
         </h1>
 
-        <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
+        <div className="flex flex-col lg:flex-row gap-20 max-w-6xl mx-auto justify-around">
           {/* Left Column - Post Creation and Feed */}
           <div className="w-full lg:w-2/3 space-y-6">
             {/* Post Creation Section */}

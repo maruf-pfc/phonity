@@ -38,32 +38,8 @@ const Navbar = () => {
         </div>
         {/* Center - Navigation Links */}
         <div className="hidden md:flex space-x-6">
-          {/* <Link
-            to="/collection/all?gender=Men"
-            className="text-gray-700 hover:text-black text-sm font-medium uppercase"
-          >
-            Men
-          </Link>
           <Link
-            to="/collection/all?gender=Women"
-            className="text-gray-700 hover:text-black text-sm font-medium uppercase"
-          >
-            Women
-          </Link>
-          <Link
-            to="/collection/all?category=Top Wear"
-            className="text-gray-700 hover:text-black text-sm font-medium uppercase"
-          >
-            Top Wear
-          </Link>
-          <Link
-            to="/collection/all?category=Bottom Wear"
-            className="text-gray-700 hover:text-black text-sm font-medium uppercase"
-          >
-            Bottom Wear
-          </Link> */}
-          <Link
-            to="/shop"
+            to="/product"
             className="text-gray-700 hover:text-black text-sm font-medium uppercase"
           >
             Shop
@@ -73,6 +49,12 @@ const Navbar = () => {
             className="text-gray-700 hover:text-black text-sm font-medium uppercase"
           >
             Community
+          </Link>
+          <Link
+            to="/offers"
+            className="text-gray-700 hover:text-black text-sm font-medium uppercase"
+          >
+            Offers
           </Link>
         </div>
         {/* Right - Search and Cart */}
@@ -124,36 +106,8 @@ const Navbar = () => {
         <div className="p-4">
           <h2 className="text-xm font-semibold mb-4">Menu</h2>
           <nav className="space-y-4">
-            {/* <Link
-              to="/collection/all?gender=Men"
-              className="block py-2 text-gray-700 hover:text-black"
-              onClick={toggleNavDrawer}
-            >
-              Men
-            </Link>
             <Link
-              to="/collection/all?gender=Women"
-              className="block py-2 text-gray-700 hover:text-black"
-              onClick={toggleNavDrawer}
-            >
-              Women
-            </Link>
-            <Link
-              to="/collection/all?category=Top Wear"
-              className="block py-2 text-gray-700 hover:text-black"
-              onClick={toggleNavDrawer}
-            >
-              Top Wear
-            </Link>
-            <Link
-              to="/collection/all?category=Bottom Wear"
-              className="block py-2 text-gray-700 hover:text-black"
-              onClick={toggleNavDrawer}
-            >
-              Bottom Wear
-            </Link> */}
-            <Link
-              to="/shop"
+              to="/product"
               className="block py-2 text-gray-700 hover:text-black"
               onClick={toggleNavDrawer}
             >
@@ -165,6 +119,13 @@ const Navbar = () => {
               onClick={toggleNavDrawer}
             >
               Community
+            </Link>
+            <Link
+              to="/offers"
+              className="block py-2 text-gray-700 hover:text-black"
+              onClick={toggleNavDrawer}
+            >
+              Offers
             </Link>
           </nav>
         </div>

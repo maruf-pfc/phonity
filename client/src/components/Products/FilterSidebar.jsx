@@ -6,42 +6,41 @@ const FilterSidebar = () => {
   const navigate = useNavigate();
 
   const [filters, setFilters] = useState({
-    category: "",
-    gender: "",
-    color: "",
-    size: [],
-    material: [],
     brand: [],
+    storage: [],
+    ram: [],
+    color: "",
     minPrice: 0,
     maxPrice: 100,
   });
 
   const [priceRange, setPriceRange] = useState([0, 100]);
 
-  const categories = ["Top Wear", "Bottom Wear"];
-  const colors = [
-    "Red",
-    "Blue",
-    "Green",
-    "Black",
-    "White",
-    "Yellow",
-    "Pink",
-    "Purple",
+  const colors = ["Red", "Blue", "Green", "Black", "White", "Purple"];
+  const storages = ["64GB", "128GB", "256GB"];
+  const rams = ["4GB", "6GB", "8GB"];
+  const brands = [
+    "Apple",
+    "Samsung",
+    "OnePlus",
+    "Xiaomi",
+    "Realme",
+    "Oppo",
+    "Vivo",
+    "Nokia",
+    "Motorola",
+    "Google",
+    "Huawei",
+    "Lenovo",
+    "Asus",
   ];
-  const sizes = ["S", "M", "L", "XL", "XXL"];
-  const materials = ["Cotton", "Polyester", "Wool", "Silk"];
-  const brands = ["Nike", "Adidas", "Puma", "Reebok"];
-  const genders = ["Men", "Women"];
 
   useEffect(() => {
     const params = Object.fromEntries([...searchParams]);
     setFilters({
-      category: params.category || "",
-      gender: params.gender || "",
+      storage: params.storage ? params.storage.split(",") : [],
+      ram: params.ram ? params.ram.split(",") : [],
       color: params.color || "",
-      size: params.size ? params.size.split(",") : [],
-      material: params.material ? params.material.split(",") : [],
       brand: params.brand ? params.brand.split(",") : [],
       minPrice: params.minPrice || 0,
       maxPrice: params.maxPrice || 100,
@@ -93,48 +92,62 @@ const FilterSidebar = () => {
     <div className="p-4">
       <h3 className="text-xl font-medium text-gray-800 mb-4">Filter</h3>
 
-      {/* Category Filter */}
+      {/* Brand Filter */}
       <div className="mb-6">
-        <label
-          htmlFor="category"
-          className="block text-gray-600 font-medium mb-2"
-        >
-          Category
+        <label htmlFor="brand" className="block text-gray-600">
+          Brand
         </label>
-        {categories.map((category) => (
-          <div key={category} className="flex items-center mb-1">
+        {brands.map((brand) => (
+          <div key={brand} className="flex items-center mb-1">
             <input
-              type="radio"
-              name="category"
-              value={category}
+              type="checkbox"
+              name="brand"
+              value={brand}
               onChange={handleFilterChange}
-              checked={filters.category === category}
-              className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray 300"
+              checked={filters.brand.includes(brand)}
+              className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-300"
             />
-            <span className="text-gray-700">{category}</span>
+            <span className="text-gray-700">{brand}</span>
           </div>
         ))}
       </div>
 
-      {/* Gender Filter */}
+      {/* Storage Filter */}
       <div className="mb-6">
-        <label
-          htmlFor="gender"
-          className="block text-gray-600 font-medium mb-2"
-        >
-          Gender
+        <label htmlFor="storage" className="block text-gray-600">
+          Storage
         </label>
-        {genders.map((gender) => (
-          <div key={gender} className="flex items-center mb-1">
+        {storages.map((storage) => (
+          <div key={storage} className="flex items-center mb-1">
             <input
-              type="radio"
-              name="gender"
-              value={gender}
+              type="checkbox"
+              name="storage"
+              value={storage}
               onChange={handleFilterChange}
-              checked={filters.gender === gender}
-              className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray 300"
+              checked={filters.storage.includes(storage)}
+              className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-300"
             />
-            <span className="text-gray-700">{gender}</span>
+            <span className="text-gray-700">{storage}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Ram Filter */}
+      <div className="mb-6">
+        <label htmlFor="ram" className="block text-gray-600">
+          Ram
+        </label>
+        {rams.map((ram) => (
+          <div key={ram} className="flex items-center mb-1">
+            <input
+              type="checkbox"
+              name="ram"
+              value={ram}
+              onChange={handleFilterChange}
+              checked={filters.ram.includes(ram)}
+              className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-300"
+            />
+            <span className="text-gray-700">{ram}</span>
           </div>
         ))}
       </div>
@@ -158,66 +171,6 @@ const FilterSidebar = () => {
             ></button>
           ))}
         </div>
-      </div>
-
-      {/* Size Filter */}
-      <div className="mb-6">
-        <label htmlFor="size" className="block text-gray-600">
-          Size
-        </label>
-        {sizes.map((size) => (
-          <div key={size} className="flex items-center mb-1">
-            <input
-              type="checkbox"
-              name="size"
-              value={size}
-              onChange={handleFilterChange}
-              checked={filters.size.includes(size)}
-              className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-300"
-            />
-            <span className="text-gray-700">{size}</span>
-          </div>
-        ))}
-      </div>
-
-      {/* Material Filter */}
-      <div className="mb-6">
-        <label htmlFor="material" className="block text-gray-600">
-          Material
-        </label>
-        {materials.map((material) => (
-          <div key={material} className="flex items-center mb-1">
-            <input
-              type="checkbox"
-              name="material"
-              value={material}
-              onChange={handleFilterChange}
-              checked={filters.material.includes(material)}
-              className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-300"
-            />
-            <span className="text-gray-700">{material}</span>
-          </div>
-        ))}
-      </div>
-
-      {/* Brand Filter */}
-      <div className="mb-6">
-        <label htmlFor="brand" className="block text-gray-600">
-          Brand
-        </label>
-        {brands.map((brand) => (
-          <div key={brand} className="flex items-center mb-1">
-            <input
-              type="checkbox"
-              name="brand"
-              value={brand}
-              onChange={handleFilterChange}
-              checked={filters.brand.includes(brand)}
-              className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-300"
-            />
-            <span className="text-gray-700">{brand}</span>
-          </div>
-        ))}
       </div>
 
       {/* Price Range Filter */}

@@ -18,8 +18,9 @@ const ProductDetails = ({ productId }) => {
   const { user, guestId } = useSelector((state) => state.auth);
 
   const [mainImage, setMainImage] = useState("");
-  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedStorage, setSelectedStorage] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
+  const [selectedRam, setSelectedRam] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
@@ -66,8 +67,9 @@ const ProductDetails = ({ productId }) => {
       addToCart({
         productId: productFetchId,
         quantity,
-        size: selectedSize,
+        storage: selectedStorage,
         color: selectedColor,
+        ram: selectedRam,
         guestId,
         userId: user?._id,
       })
@@ -158,7 +160,7 @@ const ProductDetails = ({ productId }) => {
                   `${selectedProduct.originalPrice}`}
               </p>
               <p className="text-xl text-gray-500 mb-2">
-                $ {selectedProduct.price}
+                {selectedProduct.price} ৳
               </p>
               <p className="text-gray-600 mb-4">
                 {selectedProduct.description}
@@ -186,19 +188,37 @@ const ProductDetails = ({ productId }) => {
               </div>
 
               <div className="mb-4">
-                <p className="text-gray-700">Size:</p>
+                <p className="text-gray-700">Storage:</p>
                 <div className="flex gap-2 mt-2">
-                  {selectedProduct.sizes.map((size) => (
+                  {selectedProduct.storage.map((storage) => (
                     <button
-                      key={size}
-                      onClick={() => setSelectedSize(size)}
+                      key={storage}
+                      onClick={() => setSelectedStorage(storage)}
                       className={`px-4 py-2 rounded border ${
-                        selectedSize === size
+                        selectedStorage === storage
                           ? "bg-black text-white"
                           : "bg-gray-200 text-gray-700"
                       }`}
                     >
-                      {size}
+                      {storage}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="mb-4">
+                <p className="text-gray-700">Ram:</p>
+                <div className="flex gap-2 mt-2">
+                  {selectedProduct.ram.map((ram) => (
+                    <button
+                      key={ram}
+                      onClick={() => setSelectedRam(ram)}
+                      className={`px-4 py-2 rounded border ${
+                        selectedRam === ram
+                          ? "bg-black text-white"
+                          : "bg-gray-200 text-gray-700"
+                      }`}
+                    >
+                      {ram}
                     </button>
                   ))}
                 </div>
@@ -242,10 +262,6 @@ const ProductDetails = ({ productId }) => {
                     <tr>
                       <td className="py-1">Brand</td>
                       <td className="py-1">{selectedProduct.brand}</td>
-                    </tr>
-                    <tr>
-                      <td className="py-1">Material</td>
-                      <td className="py-1">{selectedProduct.material}</td>
                     </tr>
                   </tbody>
                 </table>
