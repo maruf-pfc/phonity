@@ -40,8 +40,8 @@ const getAllFilteredProducts = async (req, res) => {
     if (ram && ram.toLocaleLowerCase() !== "all") {
       query.ram = { $in: ram.split(",") };
     }
-    if (storage && size.toLocaleLowerCase() !== "all") {
-      query.sizes = { $in: size.split(",") };
+    if (storage && storage.toLocaleLowerCase() !== "all") {
+      query.storage = { $in: storage.split(",") };
     }
     if (color && color.toLocaleLowerCase() !== "all") {
       query.colors = { $in: [color] };
