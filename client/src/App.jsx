@@ -20,6 +20,7 @@ import OrderManagement from "./components/Admin/OrderManagement";
 import ContactUsPage from "./pages/ContactUsPage";
 import FAQsPage from "./pages/FAQsPage";
 import ShippingReturnPage from "./pages/ShippingReturnPage";
+import Community from "./pages/Community";
 
 import { Provider } from "react-redux";
 import store from "./redux/store";
@@ -52,6 +53,7 @@ function App() {
             <Route path="/contact-us" element={<ContactUsPage />} />
             <Route path="/faqs" element={<FAQsPage />} />
             <Route path="/shipping-returns" element={<ShippingReturnPage />} />
+            <Route path="/community" element={<Community />} />
           </Route>
           <Route
             path="/admin"
