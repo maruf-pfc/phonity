@@ -5,7 +5,7 @@ const Topbar = () => {
   return (
     <div className="bg-black text-white py-2 px-4">
       <div className="container mx-auto flex justify-between items-center">
-        <p className="text-sm">Free shipping on all orders over $50</p>
+        <p className="text-sm">Free shipping on all orders over 500 ৳</p>
         <div className="flex gap-4 text-sm">
           <Link to="/login" className="hover:text-gray-300">
             Login

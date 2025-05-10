@@ -40,7 +40,7 @@ const Register = () => {
     setPassword("");
   };
   return (
-    <div className="container justify-between mx-auto flex">
+    <div className="container mx-auto flex justify-around items-center">
       <div className="w-full md:w-1/2 flex flex-col py-8 md:py-12">
         <form className="w-full max-w-md bg-white p-8 rounded-lg border shadow-sm">
           <div className="flex justify-center mb-6">

@@ -38,7 +38,7 @@ const Login = () => {
     setPassword("");
   };
   return (
-    <div className="flex container mx-auto justify-between">
+    <div className="flex container mx-auto justify-around items-center">
       <div className="w-full md:w-1/2 flex flex-col items-start py-8 md:py-12">
         <form className="w-full max-w-md bg-white p-8 rounded-lg border shadow-sm">
           <div className="flex justify-center mb-6">

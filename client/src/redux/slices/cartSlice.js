@@ -38,15 +38,16 @@ export const fetchCart = createAsyncThunk(
 export const addToCart = createAsyncThunk(
   "cart/addToCart",
   async (
-    { productId, quantity, size, color, userId, guestId },
+    { productId, quantity, storage, color, ram, userId, guestId },
     { rejectWithValue }
   ) => {
     try {
       const response = await axios.post(`${API_URL}/api/v1/cart`, {
         productId,
         quantity,
-        size,
+        storage,
         color,
+        ram,
         userId,
         guestId,
       });
@@ -62,7 +63,7 @@ export const addToCart = createAsyncThunk(
 export const updateCartItemQuantity = createAsyncThunk(
   "cart/updateCartItemQuantity",
   async (
-    { productId, quantity, userId, guestId, size, color },
+    { productId, quantity, userId, guestId, storage, color, ram },
     { rejectWithValue }
   ) => {
     try {
@@ -71,8 +72,9 @@ export const updateCartItemQuantity = createAsyncThunk(
         quantity,
         userId,
         guestId,
-        size,
+        storage,
         color,
+        ram,
       });
       return response.data;
     } catch (error) {
@@ -85,7 +87,10 @@ export const updateCartItemQuantity = createAsyncThunk(
 // remove product from cart
 export const removeFromCart = createAsyncThunk(
   "cart/removeFromCart",
-  async ({ productId, userId, guestId, size, color }, { rejectWithValue }) => {
+  async (
+    { productId, userId, guestId, storage, color, ram },
+    { rejectWithValue }
+  ) => {
     try {
       const response = await axios({
         method: "DELETE",
@@ -94,8 +99,9 @@ export const removeFromCart = createAsyncThunk(
           productId,
           guestId,
           userId,
-          size,
+          storage,
           color,
+          ram,
         },
       });
       return response.data;
