@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import login from "../assets/login.webp";
+import login from "../assets/login.jpg";
 import { Link } from "react-router-dom";
 import { loginUser } from "../redux/slices/authSlice";
 import { mergeCart } from "../redux/slices/cartSlice";
@@ -42,7 +42,7 @@ const Login = () => {
       <div className="w-full md:w-1/2 flex flex-col justify-center items-center p-8 md:p-12">
         <form className="w-full max-w-md bg-white p-8 rounded-lg border shadow-sm">
           <div className="flex justify-center mb-6">
-            <h2 className="text-xl font-medium">Stylique</h2>
+            <h2 className="text-xl font-medium">Phonity</h2>
           </div>
           <h2 className="text-2xl font-bold text-center mb-6">
             Hey There! Welcome Back

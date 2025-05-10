@@ -18,6 +18,8 @@ import ProductManagement from "./components/Admin/ProductManagement";
 import EditProductPage from "./components/Admin/EditProductPage";
 import OrderManagement from "./components/Admin/OrderManagement";
 import ContactUsPage from "./pages/ContactUsPage";
+import FAQsPage from "./pages/FAQsPage";
+import ShippingReturnPage from "./pages/ShippingReturnPage";
 
 import { Provider } from "react-redux";
 import store from "./redux/store";
@@ -48,6 +50,8 @@ function App() {
             <Route path="/order/:id" element={<OrderDetailsPage />} />
             <Route path="/my-orders" element={<MyOrdersPage />} />
             <Route path="/contact-us" element={<ContactUsPage />} />
+            <Route path="/faqs" element={<FAQsPage />} />
+            <Route path="/shipping-returns" element={<ShippingReturnPage />} />
           </Route>
           <Route
             path="/admin"

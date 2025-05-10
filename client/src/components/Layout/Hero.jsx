@@ -1,6 +1,6 @@
+"use client";
+
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import heroImg from "../../assets/rabbit-hero.webp";
 
 const slides = [
   {

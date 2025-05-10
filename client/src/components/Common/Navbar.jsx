@@ -33,12 +33,12 @@ const Navbar = () => {
         {/* Left - Logo */}
         <div>
           <Link to="/" className="text-2xl font-medium">
-            Stylique
+            Phonity
           </Link>
         </div>
         {/* Center - Navigation Links */}
         <div className="hidden md:flex space-x-6">
-          <Link
+          {/* <Link
             to="/collection/all?gender=Men"
             className="text-gray-700 hover:text-black text-sm font-medium uppercase"
           >
@@ -61,6 +61,18 @@ const Navbar = () => {
             className="text-gray-700 hover:text-black text-sm font-medium uppercase"
           >
             Bottom Wear
+          </Link> */}
+          <Link
+            to="/shop"
+            className="text-gray-700 hover:text-black text-sm font-medium uppercase"
+          >
+            Shop
+          </Link>
+          <Link
+            to="/community"
+            className="text-gray-700 hover:text-black text-sm font-medium uppercase"
+          >
+            Community
           </Link>
         </div>
         {/* Right - Search and Cart */}
@@ -112,7 +124,7 @@ const Navbar = () => {
         <div className="p-4">
           <h2 className="text-xm font-semibold mb-4">Menu</h2>
           <nav className="space-y-4">
-            <Link
+            {/* <Link
               to="/collection/all?gender=Men"
               className="block py-2 text-gray-700 hover:text-black"
               onClick={toggleNavDrawer}
@@ -139,6 +151,20 @@ const Navbar = () => {
               onClick={toggleNavDrawer}
             >
               Bottom Wear
+            </Link> */}
+            <Link
+              to="/shop"
+              className="block py-2 text-gray-700 hover:text-black"
+              onClick={toggleNavDrawer}
+            >
+              Shop
+            </Link>
+            <Link
+              to="/community"
+              className="block py-2 text-gray-700 hover:text-black"
+              onClick={toggleNavDrawer}
+            >
+              Community
             </Link>
           </nav>
         </div>
