@@ -17,7 +17,7 @@ const ProductDetails = ({ productId }) => {
   );
   const { user, guestId } = useSelector((state) => state.auth);
 
-  const [mainImage, setMainImage] = useState("");
+  const [mainImage, setMainImage] = useState(0);
   const [selectedStorage, setSelectedStorage] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedRam, setSelectedRam] = useState("");
@@ -34,7 +34,7 @@ const ProductDetails = ({ productId }) => {
 
   useEffect(() => {
     if (selectedProduct?.images?.length > 0) {
-      setMainImage(selectedProduct.images[0].url);
+      setMainImage(0);
     }
   }, [selectedProduct]);
 
@@ -54,7 +54,7 @@ const ProductDetails = ({ productId }) => {
   };
 
   const handleAddToCart = () => {
-    if (!selectedSize || !selectedColor) {
+    if (!selectedRam || !selectedStorage || !selectedColor) {
       toast.error("Please select size and color before adding to cart", {
         duration: 1000,
       });
@@ -92,13 +92,13 @@ const ProductDetails = ({ productId }) => {
     );
   }
 
-  if (error) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <p className="text-red-500 text-center">Error loading product</p>
-      </div>
-    );
-  }
+  // if (error) {
+  //   return (
+  //     <div className="flex justify-center items-center h-64">
+  //       <p className="text-red-500 text-center">Error loading product</p>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="p-6">
@@ -115,7 +115,7 @@ const ProductDetails = ({ productId }) => {
                   className={`w-24 h-24 object-cover rounded-lg cursor-pointer border ${
                     mainImage === image.url ? "border-black" : "border-gray-300"
                   }`}
-                  onClick={() => setMainImage(image.url)}
+                  onClick={() => setMainImage(index)}
                   draggable="false"
                 />
               ))}
@@ -124,10 +124,10 @@ const ProductDetails = ({ productId }) => {
             <div className="md:2-1/2">
               <div className="mb-4">
                 <img
-                  src={mainImage}
+                  src={selectedProduct.images[mainImage].url}
                   alt={
-                    selectedProduct.images[0]?.altText ||
-                    `Thumbnail ${index + 1}`
+                    selectedProduct.images[mainImage]?.altText ||
+                    `Thumbnail ${mainImage + 1}`
                   }
                   className="w-full h-auto object-cover rounded-lg"
                 />
@@ -272,11 +272,14 @@ const ProductDetails = ({ productId }) => {
             <h2 className="text-2xl text-center font-medium mb-4">
               You May Also Like
             </h2>
-            <ProductGrid
+            {similarProducts.length == 0 ? <h2 className="text-center">There is no similarProducts</h2> : 
+              <ProductGrid
               products={similarProducts}
               loading={loading}
               error={error}
             />
+            }
+            
           </div>
         </div>
       )}
