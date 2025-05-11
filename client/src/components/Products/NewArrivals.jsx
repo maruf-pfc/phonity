@@ -131,7 +131,7 @@ const NewArrivals = () => {
           onMouseMove={handleMouseUpOrLeave}
           onMouseLeave={handleMouseUpOrLeave}
         >
-          {newArrivals.map((product) => (
+          {/* {newArrivals.map((product) => (
             <div
               key={product._id}
               className="min-w-[100%] sm:min-w-[50%] lg:min-w-[30%] relative"
@@ -147,6 +147,73 @@ const NewArrivals = () => {
                   <h4 className="font-medium">{product.name}</h4>
                   <p className="mt-1">${product.price}</p>
                 </Link>
+              </div>
+            </div>
+          ))} */}
+          {newArrivals.map((product) => (
+            <div
+              key={product._id}
+              className="min-w-[100%] sm:min-w-[50%] lg:min-w-[30%] relative flex flex-col gap-4 items-center justify-center flex-1/3 group h-full overflow-hidden"
+            >
+              <img
+                src={
+                  product.images && product.images[0]
+                    ? product.images[0].url
+                    : "/placeholder.svg?height=300&width=300"
+                }
+                alt={
+                  (product.images && product.images[0]?.altText) || product.name
+                }
+                className="w-[80%] h-[80%] object-cover transition-transform duration-500 scale-105"
+                onError={(e) => {
+                  e.target.src = "/placeholder.svg?height=300&width=300";
+                  e.target.alt = "Product image not available";
+                }}
+                loading="lazy"
+                draggable="false"
+              />
+              <div>
+                {product.originalPrice &&
+                  product.originalPrice > product.price && (
+                    <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                      {Math.round(
+                        ((product.originalPrice - product.price) /
+                          product.originalPrice) *
+                          100
+                      )}
+                      % OFF
+                    </div>
+                  )}
+                <div className="p-4 flex flex-col justify-between items-center">
+                  <Link
+                    to={`/product/${product._id}`}
+                    className="block group-hover:text-blue-600 transition-colors"
+                  >
+                    <h3 className="font-medium text-lg mb-2 line-clamp-1">
+                      {product.name}
+                    </h3>
+                  </Link>
+
+                  <div className="flex justify-between items-center gap-8">
+                    <div>
+                      <p className="font-bold text-lg">
+                        ${product.price.toLocaleString()}
+                      </p>
+                      {product.originalPrice && (
+                        <p className="text-sm text-gray-500 line-through">
+                          ${product.originalPrice.toLocaleString()}
+                        </p>
+                      )}
+                    </div>
+
+                    <Link
+                      to={`/product/${product._id}`}
+                      className="bg-blue-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                    >
+                      View
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           ))}
