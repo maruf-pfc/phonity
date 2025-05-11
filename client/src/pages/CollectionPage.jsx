@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaFilter } from "react-icons/fa";
 import FilterSidebar from "../components/Products/FilterSidebar";
 import SortOptions from "../components/Products/SortOptions";
-import ProductGrid from "../components/Products/ProductGrid";
+import ShowAllProducts from "../components/Products/ShowAllProducts";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductsByFilters } from "../redux/slices/productsSlice";
@@ -65,7 +65,7 @@ const CollectionPage = () => {
         <SortOptions />
 
         {/* Product Grid */}
-        <ProductGrid products={products} loading={loading} error={error} />
+        <ShowAllProducts products={products} loading={loading} error={error} />
       </div>
     </div>
   );
