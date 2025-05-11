@@ -113,6 +113,7 @@ const getSimilarProducts = async (req, res) => {
       });
     }
 
+    
     const similarProducts = await Product.find({
       _id: { $ne: id }, // Exclude the current product
       category: product.category,
