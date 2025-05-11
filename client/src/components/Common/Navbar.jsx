@@ -56,6 +56,12 @@ const Navbar = () => {
           >
             Offers
           </Link>
+          <Link
+            to="/blog"
+            className="text-gray-700 hover:text-black text-sm font-medium uppercase"
+          >
+            Blogs
+          </Link>
         </div>
         {/* Right - Search and Cart */}
         <div className="flex items-center space-x-4">
@@ -126,6 +132,13 @@ const Navbar = () => {
               onClick={toggleNavDrawer}
             >
               Offers
+            </Link>
+            <Link
+              to="/blog"
+              className="block py-2 text-gray-700 hover:text-black"
+              onClick={toggleNavDrawer}
+            >
+              Blogs
             </Link>
           </nav>
         </div>
