@@ -92,13 +92,13 @@ const ProductDetails = ({ productId }) => {
     );
   }
 
-  // if (error) {
-  //   return (
-  //     <div className="flex justify-center items-center h-64">
-  //       <p className="text-red-500 text-center">Error loading product</p>
-  //     </div>
-  //   );
-  // }
+  if (error) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <p className="text-red-500 text-center">Error loading product</p>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6">

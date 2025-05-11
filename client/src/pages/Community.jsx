@@ -122,7 +122,7 @@ export default function CommunityPage() {
           {/* Left Column - Post Creation and Feed */}
           <div className="w-full lg:w-2/3 space-y-6">
             {/* Post Creation Section */}
-            <div className="bg-white rounded-lg shadow py-6">
+            <div className="bg-white rounded-lg shadow py-6 px-4">
               <h2 className="text-xl font-semibold mb-4">Create a Post</h2>
               <form onSubmit={handleSubmitPost}>
                 <div className="flex items-start mb-4">
@@ -145,7 +145,7 @@ export default function CommunityPage() {
                     <img
                       src={imagePreview || "/placeholder.svg"}
                       alt="Preview"
-                      className="w-full h-full object-cover rounded-lg mx-auto"
+                      className="w-[30%] h-[30%] object-cover rounded-lg mx-auto"
                     />
                     <button
                       type="button"
@@ -207,34 +207,7 @@ export default function CommunityPage() {
                         className="hidden"
                       />
                     </label>
-                    {/* <button
-                      type="button"
-                      className="text-gray-500 hover:text-blue-600 flex items-center"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="mr-1"
-                      >
-                        <polygon points="23 7 16 12 23 17 23 7"></polygon>
-                        <rect
-                          x="1"
-                          y="5"
-                          width="15"
-                          height="14"
-                          rx="2"
-                          ry="2"
-                        ></rect>
-                      </svg>
-                      <span>Video</span>
-                    </button> */}
+                    
                   </div>
                   <button
                     type="submit"
@@ -254,7 +227,7 @@ export default function CommunityPage() {
             {/* Community Feed */}
             <div className="space-y-6">
               {communityPosts.map((post) => (
-                <div key={post.id} className="bg-white rounded-lg shadow py-6">
+                <div key={post.id} className="bg-white rounded-lg shadow py-6 px-4">
                   <div className="flex items-center mb-4">
                     <img
                       src={post.user.avatar || "/placeholder.svg"}
@@ -276,7 +249,7 @@ export default function CommunityPage() {
                       <img
                         src={post.image || "/placeholder.svg"}
                         alt="Post content"
-                        className="rounded-lg w-full"
+                        className="rounded-lg w-[30%] h-[30%] object-cover"
                       />
                     </div>
                   )}

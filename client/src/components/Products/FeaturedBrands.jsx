@@ -71,7 +71,7 @@ export default function FeaturedBrands() {
         {brands.map((brand) => (
           <Link
             key={brand.slug}
-            to={`/products/filtered?category=${brand.slug}`}
+            to={`/product?category=${brand.slug}`}
             className="bg-white rounded-lg p-4 flex flex-col items-center justify-center border hover:shadow-md transition-shadow group"
           >
             <div className="w-16 h-16 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">

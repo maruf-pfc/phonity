@@ -25,6 +25,9 @@ import Community from "./pages/Community";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import ProtectedRoute from "./components/Common/ProtectedRoute";
+import OffersPage from "./pages/OffersPage";
+import BlogsPage from "./pages/BlogsPage";
+import BlogPostPage from "./pages/BlogPostPage";
 
 function App() {
   return (
@@ -55,6 +58,9 @@ function App() {
             <Route path="/faqs" element={<FAQsPage />} />
             <Route path="/shipping-returns" element={<ShippingReturnPage />} />
             <Route path="/community" element={<Community />} />
+            <Route path="/offers" element={<OffersPage />} />
+            <Route path="/blog" element={<BlogsPage />} />
+            <Route path="/blog/:slug" element={<BlogPostPage />} />
           </Route>
           <Route
             path="/admin"
