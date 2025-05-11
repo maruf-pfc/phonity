@@ -28,6 +28,110 @@ const products = [
     numReviews: 12,
   },
   {
+    name: "iPhone 16 Pro",
+    description:
+      "The iPhone 16 Pro delivers top-tier performance for professionals and enthusiasts. Experience ultra-smooth multitasking with the A18 Pro chip. The advanced dual-camera system now features ProRAW and cinematic video. Durable Ceramic Shield and water resistance for added safety. Perfect for creative professionals looking to shoot, edit, and share on the go.",
+    price: 125000,
+    discountPrice: 119000,
+    countInStock: 10,
+    sku: "apple-iphone-16-pro",
+    category: "apple",
+    brand: "apple",
+    colors: ["Graphite", "Silver", "Gold"],
+    ram: ["6GB", "8GB"],
+    storage: ["128GB", "256GB", "512GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746892010/iphone16.1_ngdmdu.jpg",
+        altText: "iPhone 16 Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746892010/iphone16.2_lxhkcc.jpg",
+        altText: "iPhone 16 Back View",
+      },
+    ],
+    rating: 4.8,
+    numReviews: 18,
+  },
+  {
+    name: "iPhone 16 Mini",
+    description:
+      "Compact yet powerful, the iPhone 16 Mini is perfect for everyday users. Featuring the same A18 chip for fast performance and the sleek dual-camera design for quality photos. Lightweight and pocket-friendly with all the iOS features you love. Ideal for those who prefer smaller screens without compromising on speed.",
+    price: 79900,
+    discountPrice: 74900,
+    countInStock: 25,
+    sku: "apple-iphone-16-mini",
+    category: "apple",
+    brand: "apple",
+    colors: ["Blue", "Red", "Black"],
+    ram: ["4GB", "6GB"],
+    storage: ["64GB", "128GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746892010/iphone16.1_ngdmdu.jpg",
+        altText: "iPhone 16 Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746892010/iphone16.2_lxhkcc.jpg",
+        altText: "iPhone 16 Back View",
+      },
+    ],
+    rating: 4.3,
+    numReviews: 9,
+  },
+  {
+    name: "iPhone 16 SE",
+    description:
+      "The iPhone 16 SE is your entry into the Apple ecosystem. Equipped with the A17 chip and a vibrant Retina display. Keep all your favorite apps and media running smoothly. Enhanced battery life and classic design — perfect for first-time iPhone users or as a secondary device.",
+    price: 65900,
+    discountPrice: 0,
+    countInStock: 30,
+    sku: "apple-iphone-16-se",
+    category: "apple",
+    brand: "apple",
+    colors: ["White", "Black", "Blue"],
+    ram: ["4GB"],
+    storage: ["64GB", "128GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746892010/iphone16.1_ngdmdu.jpg",
+        altText: "iPhone 16 Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746892010/iphone16.2_lxhkcc.jpg",
+        altText: "iPhone 16 Back View",
+      },
+    ],
+    rating: 4.0,
+    numReviews: 6,
+  },
+  {
+    name: "iPhone 16 Ultra",
+    description:
+      "Redefining premium, the iPhone 16 Ultra is the ultimate iPhone experience. Comes with a titanium build, extended battery, and an ultra-responsive 120Hz ProMotion display. Record in 8K, edit in real-time, and enjoy pro-level tools with the A18 Ultra chip. A flagship designed for the future.",
+    price: 165000,
+    discountPrice: 155000,
+    countInStock: 5,
+    sku: "apple-iphone-16-ultra",
+    category: "apple",
+    brand: "apple",
+    colors: ["Titanium Gray", "Dark Blue"],
+    ram: ["8GB", "12GB"],
+    storage: ["256GB", "512GB", "1TB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746892010/iphone16.1_ngdmdu.jpg",
+        altText: "iPhone 16 Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746892010/iphone16.2_lxhkcc.jpg",
+        altText: "iPhone 16 Back View",
+      },
+    ],
+    rating: 4.9,
+    numReviews: 21,
+  },
+  {
     name: "Galaxy S24 FE 5G",
     description:
       "Introducing the Samsung Galaxy S24 FE 5G, the ultimate budget flagship that redefines value without compromise. With Galaxy AI at your fingertips, unleash endless creativity, capturing stunning moments effortlessly. Its stylish design combines sleek aesthetics with exceptional durability, ensuring it stands the test of time. The outstanding camera, enhanced by Galaxy AI, transforms ordinary shots into breathtaking masterpieces, eliminating blemishes and imperfections. Plus, with long-lasting battery life and remarkable performance, the Galaxy S24 FE 5G is your perfect companion for every adventure. Experience innovation and style like never before.",
@@ -52,6 +156,110 @@ const products = [
     ],
     rating: 4.7,
     numReviews: 8,
+  },
+  {
+    name: "Galaxy S24 Ultra",
+    description:
+      "Take your productivity and creativity to the next level with the Galaxy S24 Ultra. Featuring the powerful Snapdragon chipset and a Quad-HD display with 120Hz refresh rate, every swipe feels fluid. The 200MP camera with AI enhancements ensures every shot is detailed and dynamic. Ideal for professionals and creatives alike.",
+    price: 135000,
+    discountPrice: 128000,
+    countInStock: 10,
+    sku: "samsung-galaxy-s24-ultra",
+    category: "samsung",
+    brand: "samsung",
+    colors: ["Titanium Black", "Titanium Gray", "Titanium Violet"],
+    ram: ["12GB", "16GB"],
+    storage: ["256GB", "512GB", "1TB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746893122/galaxys24.1_nhicwr.jpg",
+        altText: "Galaxy S24 FE Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746893122/galaxys24.2_ejb0sg.jpg",
+        altText: "Galaxy S24 FE Back View",
+      },
+    ],
+    rating: 4.9,
+    numReviews: 20,
+  },
+  {
+    name: "Galaxy S24 Plus",
+    description:
+      "Galaxy S24 Plus bridges performance and affordability. It delivers flagship performance with a large vibrant display, upgraded battery life, and an improved triple camera system. With Galaxy AI for smarter processing, it's a perfect blend for tech enthusiasts and general users.",
+    price: 98000,
+    discountPrice: 93000,
+    countInStock: 18,
+    sku: "samsung-galaxy-s24-plus",
+    category: "samsung",
+    brand: "samsung",
+    colors: ["Lavender", "Cream", "Graphite"],
+    ram: ["8GB", "12GB"],
+    storage: ["256GB", "512GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746893122/galaxys24.1_nhicwr.jpg",
+        altText: "Galaxy S24 FE Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746893122/galaxys24.2_ejb0sg.jpg",
+        altText: "Galaxy S24 FE Back View",
+      },
+    ],
+    rating: 4.6,
+    numReviews: 14,
+  },
+  {
+    name: "Galaxy S24 Lite",
+    description:
+      "Compact and capable, the Galaxy S24 Lite brings you a slim profile with dependable power. Featuring a 6.1-inch AMOLED display, AI-boosted camera, and day-long battery life, it’s designed for casual users looking for premium features at a lighter price point.",
+    price: 48900,
+    discountPrice: 45900,
+    countInStock: 22,
+    sku: "samsung-galaxy-s24-lite",
+    category: "samsung",
+    brand: "samsung",
+    colors: ["Blue", "Silver", "Black"],
+    ram: ["6GB", "8GB"],
+    storage: ["128GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746893122/galaxys24.1_nhicwr.jpg",
+        altText: "Galaxy S24 FE Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746893122/galaxys24.2_ejb0sg.jpg",
+        altText: "Galaxy S24 FE Back View",
+      },
+    ],
+    rating: 4.4,
+    numReviews: 11,
+  },
+  {
+    name: "Galaxy S24 Note",
+    description:
+      "The Galaxy S24 Note revives the Note legacy with S Pen support, powerful multitasking tools, and a massive 6.9-inch display. Built for business and creatives, it delivers seamless productivity, extended battery life, and advanced note-taking powered by AI.",
+    price: 118000,
+    discountPrice: 110000,
+    countInStock: 8,
+    sku: "samsung-galaxy-s24-note",
+    category: "samsung",
+    brand: "samsung",
+    colors: ["Phantom Black", "Burgundy"],
+    ram: ["12GB", "16GB"],
+    storage: ["256GB", "512GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746893122/galaxys24.1_nhicwr.jpg",
+        altText: "Galaxy S24 FE Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746893122/galaxys24.2_ejb0sg.jpg",
+        altText: "Galaxy S24 FE Back View",
+      },
+    ],
+    rating: 4.8,
+    numReviews: 17,
   },
   {
     name: "OnePlus 12 Pro",
@@ -80,6 +288,110 @@ const products = [
     numReviews: 10,
   },
   {
+    name: "OnePlus 12R",
+    description:
+      "The OnePlus 12R brings flagship power at an affordable price. Featuring a Snapdragon 8 Gen 1 chip, 6.74-inch AMOLED display, and 5500mAh battery, it's perfect for gamers and power users. Comes with ultra-fast 100W charging and a smooth 120Hz refresh rate.",
+    price: 59900,
+    discountPrice: 56900,
+    countInStock: 18,
+    sku: "oneplus-12r",
+    category: "oneplus",
+    brand: "oneplus",
+    colors: ["Iron Gray", "Cool Blue"],
+    ram: ["8GB", "16GB"],
+    storage: ["128GB", "256GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900673/OnePlus-12.1_mqybvr.jpg",
+        altText: "OnePlus 12 Pro Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900673/OnePlus-12.2_apvuy3.jpg",
+        altText: "OnePlus 12 Pro Back View",
+      },
+    ],
+    rating: 4.5,
+    numReviews: 9,
+  },
+  {
+    name: "OnePlus 12 Lite",
+    description:
+      "OnePlus 12 Lite is designed for users seeking style, speed, and smooth performance at a competitive price. Featuring Snapdragon 7 Gen 3, a 6.5-inch AMOLED screen, and 67W SuperVOOC charging, it covers all essentials with premium flair.",
+    price: 48900,
+    discountPrice: 45900,
+    countInStock: 30,
+    sku: "oneplus-12-lite",
+    category: "oneplus",
+    brand: "oneplus",
+    colors: ["Mint Green", "Graphite Black"],
+    ram: ["6GB", "8GB"],
+    storage: ["128GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900673/OnePlus-12.1_mqybvr.jpg",
+        altText: "OnePlus 12 Pro Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900673/OnePlus-12.2_apvuy3.jpg",
+        altText: "OnePlus 12 Pro Back View",
+      },
+    ],
+    rating: 4.3,
+    numReviews: 7,
+  },
+  {
+    name: "OnePlus 12T",
+    description:
+      "Power meets innovation in the OnePlus 12T. Packed with the MediaTek Dimensity 9200 chipset and a vibrant 6.7-inch AMOLED display, this device handles intensive tasks with ease. Enjoy ultra-fast 120W charging and a reliable 50MP camera system.",
+    price: 67900,
+    discountPrice: 64500,
+    countInStock: 20,
+    sku: "oneplus-12t",
+    category: "oneplus",
+    brand: "oneplus",
+    colors: ["Moonstone Black", "Sapphire Blue"],
+    ram: ["8GB", "12GB"],
+    storage: ["256GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900673/OnePlus-12.1_mqybvr.jpg",
+        altText: "OnePlus 12 Pro Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900673/OnePlus-12.2_apvuy3.jpg",
+        altText: "OnePlus 12 Pro Back View",
+      },
+    ],
+    rating: 4.4,
+    numReviews: 12,
+  },
+  {
+    name: "OnePlus 12 Ultra",
+    description:
+      "Unleash maximum performance with the OnePlus 12 Ultra. It features a Snapdragon 8 Gen 3 processor, ceramic back design, and a groundbreaking 1-inch camera sensor. Paired with 100W fast charging and 2K 144Hz display, it's the pinnacle of smartphone engineering.",
+    price: 105000,
+    discountPrice: 98000,
+    countInStock: 6,
+    sku: "oneplus-12-ultra",
+    category: "oneplus",
+    brand: "oneplus",
+    colors: ["Ceramic White", "Matte Black"],
+    ram: ["12GB", "16GB"],
+    storage: ["256GB", "512GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900673/OnePlus-12.1_mqybvr.jpg",
+        altText: "OnePlus 12 Pro Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900673/OnePlus-12.2_apvuy3.jpg",
+        altText: "OnePlus 12 Pro Back View",
+      },
+    ],
+    rating: 4.9,
+    numReviews: 15,
+  },
+  {
     name: "Google Pixel 8",
     description:
       "The Google Pixel 8 offers a pure Android experience with the latest features. Its Tensor G3 chip ensures smooth performance, and the 6.2-inch OLED display provides crisp visuals. The dual-camera system captures detailed photos, and the device boasts excellent battery life with fast charging capabilities.",
@@ -104,6 +416,110 @@ const products = [
     ],
     rating: 4.4,
     numReviews: 15,
+  },
+  {
+    name: "Google Pixel 8 Pro",
+    description:
+      "The Pixel 8 Pro is Google's most advanced smartphone yet, featuring a 6.7-inch LTPO OLED display, Tensor G3 chip, and pro-level camera system with advanced AI features. Enjoy up to 7 years of software updates and Google's cleanest Android experience.",
+    price: 99000,
+    discountPrice: 95000,
+    countInStock: 15,
+    sku: "google-pixel-8-pro",
+    category: "google",
+    brand: "google",
+    colors: ["Obsidian", "Porcelain", "Bay"],
+    ram: ["12GB"],
+    storage: ["128GB", "256GB", "512GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900773/Pixel-8.1_nlss9f.jpg",
+        altText: "Google Pixel 8 Pro Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900773/Pixel-8.2_hexcic.jpg",
+        altText: "Google Pixel 8 Pro Back View",
+      },
+    ],
+    rating: 4.7,
+    numReviews: 21,
+  },
+  {
+    name: "Google Pixel 7a",
+    description:
+      "The Pixel 7a offers flagship features at a budget price. With a 6.1-inch OLED display, Tensor G2 chip, and high-quality dual camera, it provides an exceptional Android experience for everyday users.",
+    price: 47900,
+    discountPrice: 44900,
+    countInStock: 35,
+    sku: "google-pixel-7a",
+    category: "google",
+    brand: "google",
+    colors: ["Charcoal", "Sea", "Snow"],
+    ram: ["8GB"],
+    storage: ["128GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900773/Pixel-8.1_nlss9f.jpg",
+        altText: "Google Pixel 7a Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900773/Pixel-8.2_hexcic.jpg",
+        altText: "Google Pixel 7a Back View",
+      },
+    ],
+    rating: 4.3,
+    numReviews: 18,
+  },
+  {
+    name: "Google Pixel Fold",
+    description:
+      "Google Pixel Fold reimagines productivity with a foldable 7.6-inch inner OLED screen and outer 5.8-inch display. Powered by Tensor G2 and packed with powerful multitasking capabilities, it blends phone and tablet into one premium device.",
+    price: 145000,
+    discountPrice: 140000,
+    countInStock: 10,
+    sku: "google-pixel-fold",
+    category: "google",
+    brand: "google",
+    colors: ["Obsidian", "Chalk"],
+    ram: ["12GB"],
+    storage: ["256GB", "512GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900773/Pixel-8.1_nlss9f.jpg",
+        altText: "Google Pixel Fold Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900773/Pixel-8.2_hexcic.jpg",
+        altText: "Google Pixel Fold Back View",
+      },
+    ],
+    rating: 4.6,
+    numReviews: 11,
+  },
+  {
+    name: "Google Pixel 6",
+    description:
+      "The Pixel 6 redefined Android design with the first-gen Google Tensor chip, a 6.4-inch AMOLED screen, and powerful dual-camera setup. It’s still a great pick for clean software, security updates, and Google’s AI-driven photography.",
+    price: 39900,
+    discountPrice: 36900,
+    countInStock: 20,
+    sku: "google-pixel-6",
+    category: "google",
+    brand: "google",
+    colors: ["Stormy Black", "Kinda Coral", "Sorta Seafoam"],
+    ram: ["8GB"],
+    storage: ["128GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900773/Pixel-8.1_nlss9f.jpg",
+        altText: "Google Pixel 6 Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900773/Pixel-8.2_hexcic.jpg",
+        altText: "Google Pixel 6 Back View",
+      },
+    ],
+    rating: 4.2,
+    numReviews: 20,
   },
   {
     name: "Xiaomi Mi 14",
@@ -132,6 +548,110 @@ const products = [
     numReviews: 20,
   },
   {
+    name: "Xiaomi Mi 14 Pro",
+    description:
+      "Xiaomi Mi 14 Pro delivers flagship-grade performance with a larger 6.73-inch AMOLED display, Snapdragon 8 Gen 2, and Leica-enhanced triple cameras. It supports 120W HyperCharge and features premium build quality.",
+    price: 75000,
+    discountPrice: 72000,
+    countInStock: 20,
+    sku: "xiaomi-mi-14-pro",
+    category: "xiaomi",
+    brand: "xiaomi",
+    colors: ["Black", "White"],
+    ram: ["12GB", "16GB"],
+    storage: ["256GB", "512GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900892/mi14.1_tqlu6u.jpg",
+        altText: "Xiaomi Mi 14 Pro Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900893/mi14.2_nr2c6f.jpg",
+        altText: "Xiaomi Mi 14 Pro Back View",
+      },
+    ],
+    rating: 4.5,
+    numReviews: 25,
+  },
+  {
+    name: "Xiaomi Redmi Note 13 Pro",
+    description:
+      "Redmi Note 13 Pro offers a perfect balance of performance and value. Featuring a 6.67-inch AMOLED display, Snapdragon 7s Gen 2 chip, and 200MP camera, it’s built for users who want flagship features at a mid-range price.",
+    price: 36000,
+    discountPrice: 34000,
+    countInStock: 50,
+    sku: "redmi-note-13-pro",
+    category: "xiaomi",
+    brand: "xiaomi",
+    colors: ["Black", "Blue", "Purple"],
+    ram: ["8GB", "12GB"],
+    storage: ["128GB", "256GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900892/mi14.1_tqlu6u.jpg",
+        altText: "Redmi Note 13 Pro Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900893/mi14.2_nr2c6f.jpg",
+        altText: "Redmi Note 13 Pro Back View",
+      },
+    ],
+    rating: 4.2,
+    numReviews: 30,
+  },
+  {
+    name: "Xiaomi 13T",
+    description:
+      "Xiaomi 13T brings Leica-powered cameras, a 144Hz CrystalRes AMOLED display, and Dimensity 8200-Ultra chip to the mid-premium segment. It supports 67W turbocharging and is IP68 water-resistant.",
+    price: 54000,
+    discountPrice: 52000,
+    countInStock: 28,
+    sku: "xiaomi-13t",
+    category: "xiaomi",
+    brand: "xiaomi",
+    colors: ["Alpine Blue", "Meadow Green", "Black"],
+    ram: ["8GB", "12GB"],
+    storage: ["256GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900892/mi14.1_tqlu6u.jpg",
+        altText: "Xiaomi 13T Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900893/mi14.2_nr2c6f.jpg",
+        altText: "Xiaomi 13T Back View",
+      },
+    ],
+    rating: 4.4,
+    numReviews: 22,
+  },
+  {
+    name: "Poco F5 Pro",
+    description:
+      "Poco F5 Pro, part of Xiaomi's performance-focused lineup, features a WQHD+ AMOLED display, Snapdragon 8+ Gen 1, and 5160mAh battery with 67W wired + 30W wireless charging. It’s built for gamers and power users.",
+    price: 50000,
+    discountPrice: 47500,
+    countInStock: 32,
+    sku: "poco-f5-pro",
+    category: "xiaomi",
+    brand: "xiaomi",
+    colors: ["White", "Black"],
+    ram: ["8GB", "12GB"],
+    storage: ["256GB", "512GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900892/mi14.1_tqlu6u.jpg",
+        altText: "Poco F5 Pro Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746900893/mi14.2_nr2c6f.jpg",
+        altText: "Poco F5 Pro Back View",
+      },
+    ],
+    rating: 4.3,
+    numReviews: 19,
+  },
+  {
     name: "Huawei P60 Pro",
     description:
       "Huawei P60 Pro offers top-tier photography capabilities with its quad-camera system. The 6.6-inch OLED display ensures vibrant visuals, and the Kirin 9000 processor delivers smooth performance. With a 4500mAh battery and 66W fast charging, stay connected all day.",
@@ -158,6 +678,110 @@ const products = [
     numReviews: 9,
   },
   {
+    name: "Huawei Mate 50 Pro",
+    description:
+      "Huawei Mate 50 Pro features a 6.74-inch OLED display, Snapdragon 8+ Gen 1 4G processor, and 50MP ultra-aperture camera. With Kunlun Glass protection, 4700mAh battery, and 66W wired + 50W wireless charging, it's built for power and durability.",
+    price: 88000,
+    discountPrice: 85000,
+    countInStock: 15,
+    sku: "huawei-mate-50-pro",
+    category: "huawei",
+    brand: "huawei",
+    colors: ["Orange", "Black"],
+    ram: ["8GB", "12GB"],
+    storage: ["256GB", "512GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746901071/HUAWEI-P60-Pro.1_klmfze.jpg",
+        altText: "Huawei Mate 50 Pro Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746901071/HUAWEI-P60-Pro.2_mfwibz.jpg",
+        altText: "Huawei Mate 50 Pro Back View",
+      },
+    ],
+    rating: 4.6,
+    numReviews: 12,
+  },
+  {
+    name: "Huawei Nova 11 Pro",
+    description:
+      "The Nova 11 Pro blends sleek design with solid specs, including a 6.78-inch OLED curved display, Snapdragon 778G 4G, and dual selfie cameras. Fast charging and long-lasting battery life make it a great daily driver.",
+    price: 52000,
+    discountPrice: 50000,
+    countInStock: 25,
+    sku: "huawei-nova-11-pro",
+    category: "huawei",
+    brand: "huawei",
+    colors: ["Green", "Black"],
+    ram: ["8GB"],
+    storage: ["256GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746901071/HUAWEI-P60-Pro.1_klmfze.jpg",
+        altText: "Huawei Nova 11 Pro Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746901071/HUAWEI-P60-Pro.2_mfwibz.jpg",
+        altText: "Huawei Nova 11 Pro Back View",
+      },
+    ],
+    rating: 4.2,
+    numReviews: 18,
+  },
+  {
+    name: "Huawei P50 Pocket",
+    description:
+      "The Huawei P50 Pocket offers a foldable design, OLED main screen, and 40MP True-Chroma camera system. It features a Snapdragon 888 4G processor and supports 40W SuperCharge in a stylish compact form.",
+    price: 98000,
+    discountPrice: 95000,
+    countInStock: 10,
+    sku: "huawei-p50-pocket",
+    category: "huawei",
+    brand: "huawei",
+    colors: ["Gold", "White"],
+    ram: ["8GB", "12GB"],
+    storage: ["256GB", "512GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746901071/HUAWEI-P60-Pro.1_klmfze.jpg",
+        altText: "Huawei P50 Pocket Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746901071/HUAWEI-P60-Pro.2_mfwibz.jpg",
+        altText: "Huawei P50 Pocket Back View",
+      },
+    ],
+    rating: 4.4,
+    numReviews: 7,
+  },
+  {
+    name: "Huawei Y9a",
+    description:
+      "Huawei Y9a brings value with a 6.63-inch FullView display, pop-up selfie camera, MediaTek Helio G80 chipset, and 64MP quad-camera setup. Its 4300mAh battery supports 40W fast charging for reliable performance.",
+    price: 32000,
+    discountPrice: 30000,
+    countInStock: 45,
+    sku: "huawei-y9a",
+    category: "huawei",
+    brand: "huawei",
+    colors: ["Sakura Pink", "Midnight Black"],
+    ram: ["6GB", "8GB"],
+    storage: ["128GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746901071/HUAWEI-P60-Pro.1_klmfze.jpg",
+        altText: "Huawei Y9a Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746901071/HUAWEI-P60-Pro.2_mfwibz.jpg",
+        altText: "Huawei Y9a Back View",
+      },
+    ],
+    rating: 4.1,
+    numReviews: 11,
+  },
+  {
     name: "Motorola Edge 40 Pro",
     description:
       "Motorola Edge 40 Pro combines sleek design with powerful performance. Featuring a 6.7-inch OLED display with a 165Hz refresh rate, Snapdragon 8 Gen 2 processor, and a 4600mAh battery with 125W fast charging, it's built for speed.",
@@ -182,6 +806,110 @@ const products = [
     ],
     rating: 4.4,
     numReviews: 11,
+  },
+  {
+    name: "Motorola G73 5G",
+    description:
+      "The Motorola G73 5G delivers solid performance with its MediaTek Dimensity 930 processor and a 6.5-inch FHD+ LCD display. Paired with a 5000mAh battery and 30W TurboPower charging, it’s built for everyday efficiency.",
+    price: 22000,
+    discountPrice: 20999,
+    countInStock: 35,
+    sku: "motorola-g73-5g",
+    category: "motorola",
+    brand: "motorola",
+    colors: ["Midnight Blue", "Lucent White"],
+    ram: ["8GB"],
+    storage: ["128GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746901220/Motorola-Edge-40-.1_cxkucm.jpg",
+        altText: "Motorola G73 5G Front View",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746901222/Motorola-Edge-40-.2_yjh6xj.jpg",
+        altText: "Motorola G73 5G Back View",
+      },
+    ],
+    rating: 4.1,
+    numReviews: 24,
+  },
+  {
+    name: "Motorola Edge 30 Fusion",
+    description:
+      "Motorola Edge 30 Fusion features a Snapdragon 888+ chipset and a vibrant 6.55-inch OLED display with 144Hz refresh rate. Slim, stylish, and powerful, it also boasts a 4400mAh battery with 68W fast charging.",
+    price: 39999,
+    discountPrice: 37999,
+    countInStock: 15,
+    sku: "motorola-edge-30-fusion",
+    category: "motorola",
+    brand: "motorola",
+    colors: ["Cosmic Grey", "Solar Gold"],
+    ram: ["8GB"],
+    storage: ["128GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746901220/Motorola-Edge-40-.1_cxkucm.jpg",
+        altText: "Motorola Edge 30 Fusion Front",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746901222/Motorola-Edge-40-.2_yjh6xj.jpg",
+        altText: "Motorola Edge 30 Fusion Rear",
+      },
+    ],
+    rating: 4.3,
+    numReviews: 17,
+  },
+  {
+    name: "Motorola Razr 40 Ultra",
+    description:
+      "The Motorola Razr 40 Ultra redefines foldable phones with its 6.9-inch pOLED main screen and a powerful Snapdragon 8+ Gen 1 processor. Compact and premium, with a 3800mAh battery and 33W fast charging.",
+    price: 89999,
+    discountPrice: 85999,
+    countInStock: 10,
+    sku: "motorola-razr-40-ultra",
+    category: "motorola",
+    brand: "motorola",
+    colors: ["Viva Magenta", "Infinite Black"],
+    ram: ["8GB"],
+    storage: ["256GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746901220/Motorola-Edge-40-.1_cxkucm.jpg",
+        altText: "Motorola Razr 40 Ultra Folded",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746901222/Motorola-Edge-40-.2_yjh6xj.jpg",
+        altText: "Motorola Razr 40 Ultra Unfolded",
+      },
+    ],
+    rating: 4.5,
+    numReviews: 9,
+  },
+  {
+    name: "Motorola Moto G62",
+    description:
+      "Powered by the Snapdragon 695 chipset and featuring a 120Hz FHD+ display, the Motorola Moto G62 offers smooth performance, stereo speakers with Dolby Atmos, and a 5000mAh battery with 20W fast charging.",
+    price: 17999,
+    discountPrice: 16999,
+    countInStock: 40,
+    sku: "motorola-moto-g62",
+    category: "motorola",
+    brand: "motorola",
+    colors: ["Frosted Blue", "Midnight Gray"],
+    ram: ["6GB", "8GB"],
+    storage: ["128GB"],
+    images: [
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746901220/Motorola-Edge-40-.1_cxkucm.jpg",
+        altText: "Motorola Moto G62 Front",
+      },
+      {
+        url: "https://res.cloudinary.com/diyh9o7eo/image/upload/v1746901222/Motorola-Edge-40-.2_yjh6xj.jpg",
+        altText: "Motorola Moto G62 Back",
+      },
+    ],
+    rating: 4.0,
+    numReviews: 33,
   },
 ];
 
