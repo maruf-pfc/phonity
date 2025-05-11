@@ -28,10 +28,10 @@ export default function CommunityPage() {
     {
       id: 1,
       user: {
-        name: "Sarah Johnson",
-        username: "@sarahj",
+        name: "Maruf Sarker",
+        username: "@maruf",
         avatar:
-          "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?cs=srgb&dl=pexels-justin-shaifer-501272-1222271.jpg&fm=jpg",
+          "https://avatars.githubusercontent.com/u/78826405?v=4",
       },
       content:
         "Just got my hands on the new Phonity X Pro! The camera quality is absolutely stunning. Has anyone else tried it yet?",
@@ -44,8 +44,8 @@ export default function CommunityPage() {
     {
       id: 2,
       user: {
-        name: "Tech Explorer",
-        username: "@techexplorer",
+        name: "Rajib Mondol",
+        username: "@rajib",
         avatar:
           "https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg",
       },
@@ -113,16 +113,16 @@ export default function CommunityPage() {
 
   return (
     <div className="bg-gray-50 min-h-screen py-8">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         <h1 className="text-3xl font-bold mb-8 text-center">
           Phonity Community
         </h1>
 
-        <div className="flex flex-col lg:flex-row gap-20 max-w-6xl mx-auto justify-around">
+        <div className="flex flex-col lg:flex-row gap-20 justify-between">
           {/* Left Column - Post Creation and Feed */}
           <div className="w-full lg:w-2/3 space-y-6">
             {/* Post Creation Section */}
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="bg-white rounded-lg shadow py-6">
               <h2 className="text-xl font-semibold mb-4">Create a Post</h2>
               <form onSubmit={handleSubmitPost}>
                 <div className="flex items-start mb-4">
@@ -254,7 +254,7 @@ export default function CommunityPage() {
             {/* Community Feed */}
             <div className="space-y-6">
               {communityPosts.map((post) => (
-                <div key={post.id} className="bg-white rounded-lg shadow p-6">
+                <div key={post.id} className="bg-white rounded-lg shadow py-6">
                   <div className="flex items-center mb-4">
                     <img
                       src={post.user.avatar || "/placeholder.svg"}
@@ -524,20 +524,20 @@ export default function CommunityPage() {
                   <div className="space-y-3">
                     {[
                       {
-                        name: "Alex Chen",
-                        username: "@alexc",
+                        name: "Tanvir Ahmmed",
+                        username: "@tanvir",
                         avatar:
                           "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fHww",
                       },
                       {
-                        name: "Maria Garcia",
-                        username: "@mariag",
+                        name: "Moriam Khatun",
+                        username: "@moriam",
                         avatar:
                           "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?cs=srgb&dl=pexels-olly-733872.jpg&fm=jpg",
                       },
                       {
-                        name: "David Kim",
-                        username: "@davidk",
+                        name: "Salma Akter",
+                        username: "@salma",
                         avatar:
                           "https://images.pexels.com/photos/12490472/pexels-photo-12490472.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
                       },
