@@ -23,6 +23,15 @@ const postSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    username: {
+        type: String
+    },
+    auth_avatar: {
+        type: String
+    },
+    auth_name: {
+        type: String
     }
 })
 

@@ -20,6 +20,7 @@ const subscriberRoutes = require("./routers/subscriberRoute");
 const adminRoutes = require("./routers/adminRoutes");
 const adminProductRoutes = require("./routers/productAdminRoutes");
 const adminOrderRoutes = require("./routers/adminOrderRoutes");
+const communityRoutes = require('./routers/communityRoutes')
 
 const app = express();
 app.use(cors());
@@ -95,5 +96,6 @@ app.use("/api/v1/", subscriberRoutes);
 app.use("/api/v1/admin/users", adminRoutes);
 app.use("/api/v1/admin/products", adminProductRoutes);
 app.use("/api/v1/admin/orders", adminOrderRoutes);
+app.use("/api/v1/community", communityRoutes),
 
 module.exports = app;
