@@ -4,14 +4,19 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { data, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import CommentCard from "../components/community/CommentCard";
 const API_URL = `${import.meta.env.VITE_BACKEND_URL}`;
 
 export default function CommunityPage() {
   const navigate = useNavigate();
+  const [postId, setPostId] = useState("");
+  const [commentContent, setCommentContent] = useState("");
   const [postContent, setPostContent] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+
+  const [comments, setComments] = useState([]);
   const { user } = useSelector((state) => state.auth);
   // Sample user data
   const currentUser = {
@@ -43,13 +48,11 @@ export default function CommunityPage() {
   const [communityPosts, setCommunityPosts] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`${API_URL}/api/v1/community`)
-      .then((res) => {
-        const data = res.data
-        data.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
-        setCommunityPosts(data)
-      });
+    axios.get(`${API_URL}/api/v1/community`).then((res) => {
+      const data = res.data;
+      data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      setCommunityPosts(data);
+    });
   }, []);
 
   // Handle image selection
@@ -63,14 +66,14 @@ export default function CommunityPage() {
 
   // Handle Like Functionality
   const handleLike = async (id, likes) => {
-   const res = await axios.put(`${API_URL}/api/v1/community/${id}`, {
-    likes: likes + 1
-   })
-   const filteredPost = communityPosts.find((post) => post._id === id)
-   filteredPost.likes = filteredPost.likes + 1
- 
-   setCommunityPosts([...communityPosts])
-  }
+    await axios.put(`${API_URL}/api/v1/community/${id}`, {
+      likes: likes + 1,
+    });
+    const filteredPost = communityPosts.find((post) => post._id === id);
+    filteredPost.likes = filteredPost.likes + 1;
+
+    setCommunityPosts([...communityPosts]);
+  };
   // Handle post submission
   const handleSubmitPost = (e) => {
     e.preventDefault();
@@ -93,8 +96,8 @@ export default function CommunityPage() {
         newPost,
       })
       .then((res) => {
-        console.log(res.data.data)
-        newPost._id = res.data.data._id
+        console.log(res.data.data);
+        newPost._id = res.data.data._id;
         setCommunityPosts([newPost, ...communityPosts]);
         setPostContent("");
         setSelectedImage(null);
@@ -102,6 +105,46 @@ export default function CommunityPage() {
       });
   };
 
+  const showCommentBox = async (postId) => {
+    await getComments(postId);
+    setPostId(postId);
+  };
+
+  const handleSubmitComment = async (e, commentsLength) => {
+    e.preventDefault();
+    const comment = {
+      userId: currentUser.userId,
+      postId: postId,
+      content: commentContent,
+      author: currentUser.name,
+      avatar: currentUser.avatar,
+    };
+    try {
+      const res = await axios.post(
+        `${API_URL}/api/v1/community/comments`,
+        comment
+      );
+      setPostId("");
+      setCommentContent("");
+      await axios.put(`${API_URL}/api/v1/community/${postId}`, {
+        comments: commentsLength + 1,
+      });
+      const filteredPost = communityPosts.find((post) => post._id === postId);
+      filteredPost.comments = filteredPost.comments + 1;
+
+      setCommunityPosts([...communityPosts])
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getComments = async (postId) => {
+    const res = await axios.get(
+      `${API_URL}/api/v1/community/comments/${postId}`
+    );
+    console.log(res.data);
+    setComments(res.data);
+  };
   return (
     <div className="bg-gray-50 min-h-screen py-8">
       <div className="container mx-auto">
@@ -254,7 +297,10 @@ export default function CommunityPage() {
                   )}
 
                   <div className="flex justify-between text-gray-500 pt-2 border-t">
-                    <button onClick={() => handleLike(post._id, post.likes)} className="flex items-center hover:text-blue-600">
+                    <button
+                      onClick={() => handleLike(post._id, post.likes)}
+                      className="flex items-center hover:text-blue-600"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
@@ -271,7 +317,10 @@ export default function CommunityPage() {
                       </svg>
                       <span>{post.likes}</span>
                     </button>
-                    <button className="flex items-center hover:text-blue-600">
+                    <button
+                      onClick={() => showCommentBox(post._id)}
+                      className="flex items-center hover:text-blue-600"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
@@ -289,6 +338,52 @@ export default function CommunityPage() {
                       <span>{post.comments}</span>
                     </button>
                   </div>
+
+                  {/* comment box */}
+                  {post._id === postId && (
+                    <div>
+                      <div className="my-5">
+                        {comments.length > 0 &&
+                          comments.map((comment) => (
+                            <CommentCard
+                              content={comment.content}
+                              author={comment?.author || "Anonymous"}
+                              time={new Date(
+                                comment.createdAt
+                              ).toLocaleString()}
+                              avatar={
+                                comment?.avatar ||
+                                "https://t4.ftcdn.net/jpg/10/29/66/05/360_F_1029660575_DPdwknEa7hiEveRujsBmxXLfFxJM31UA.jpg"
+                              }
+                            />
+                          ))}
+                      </div>
+                      <form onSubmit={(e) => handleSubmitComment(e, comments.length)}>
+                        <div className="flex items-start my-4">
+                          <textarea
+                            value={commentContent}
+                            onChange={(e) => setCommentContent(e.target.value)}
+                            placeholder="Write a Comment..."
+                            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                            rows="3"
+                          ></textarea>
+                        </div>
+                        <div className="flex justify-end items-center">
+                          <button
+                            type="submit"
+                            className={`px-4 py-2 rounded-lg font-medium ${
+                              !commentContent.trim()
+                                ? "bg-blue-300 cursor-not-allowed"
+                                : "bg-blue-600 hover:bg-blue-700 text-white"
+                            }`}
+                            disabled={!commentContent.trim()}
+                          >
+                            Comment
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

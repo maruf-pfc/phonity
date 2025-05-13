@@ -5,6 +5,10 @@ const commentsSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    postId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post'
+    },
     commentId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Comment'
@@ -16,6 +20,12 @@ const commentsSchema = mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    avatar: {
+        type: String
+    },
+    author: {
+        type: String
     }
 })
 
