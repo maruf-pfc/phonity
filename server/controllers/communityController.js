@@ -13,6 +13,24 @@ const getAllPosts = async (req, res) => {
     }
 }
 
+const updatePost = async(req, res) => {
+    try{
+        console.log(req.body)
+        const post = await Post.findByIdAndUpdate(
+           req.params.id,
+           {$set: {likes: req.body.likes}},
+           {new: true}
+        )
+        console.log(post)
+        res.send(post)
+    }catch(err){
+        console.log(err)
+        return res.status(500).json({
+            status: 'fail',
+            message: "Server error when fetching a post!"
+        })
+    }
+}
 const createNewPost = async(req, res) => {
     try{
         const body = req.body.newPost;
@@ -33,5 +51,6 @@ const createNewPost = async(req, res) => {
 
 module.exports = {
     getAllPosts,
-    createNewPost
+    createNewPost,
+    updatePost
 }

@@ -13,7 +13,7 @@ export default function CommunityPage() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const { user } = useSelector((state) => state.auth);
-// Sample user data
+  // Sample user data
   const currentUser = {
     name: "Md Sohel",
     username: "@sohel",
@@ -35,19 +35,22 @@ export default function CommunityPage() {
     }
   }, [user, navigate]);
 
-  if(user){
+  if (user) {
     currentUser.userId = user._id;
   }
-
 
   // Sample community posts
   const [communityPosts, setCommunityPosts] = useState([]);
 
   useEffect(() => {
-    axios.get(`${API_URL}/api/v1/community`)
-    .then(res => setCommunityPosts(res.data))
-  },[])
-
+    axios
+      .get(`${API_URL}/api/v1/community`)
+      .then((res) => {
+        const data = res.data
+        data.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
+        setCommunityPosts(data)
+      });
+  }, []);
 
   // Handle image selection
   const handleImageChange = (e) => {
@@ -58,6 +61,16 @@ export default function CommunityPage() {
     }
   };
 
+  // Handle Like Functionality
+  const handleLike = async (id, likes) => {
+   const res = await axios.put(`${API_URL}/api/v1/community/${id}`, {
+    likes: likes + 1
+   })
+   const filteredPost = communityPosts.find((post) => post._id === id)
+   filteredPost.likes = filteredPost.likes + 1
+ 
+   setCommunityPosts([...communityPosts])
+  }
   // Handle post submission
   const handleSubmitPost = (e) => {
     e.preventDefault();
@@ -72,19 +85,21 @@ export default function CommunityPage() {
       comments: 0,
       username: currentUser.username,
       auth_avatar: currentUser.avatar,
-      auth_name: currentUser.name
+      auth_name: currentUser.name,
     };
 
-    axios.post(`${API_URL}/api/v1/community`,{
-      newPost
-    }).then((res => console.log(res)));
-
-    console.log('data')
-
-    setCommunityPosts([newPost, ...communityPosts]);
-    setPostContent("");
-    setSelectedImage(null);
-    setImagePreview(null);
+    axios
+      .post(`${API_URL}/api/v1/community`, {
+        newPost,
+      })
+      .then((res) => {
+        console.log(res.data.data)
+        newPost._id = res.data.data._id
+        setCommunityPosts([newPost, ...communityPosts]);
+        setPostContent("");
+        setSelectedImage(null);
+        setImagePreview(null);
+      });
   };
 
   return (
@@ -210,13 +225,18 @@ export default function CommunityPage() {
                   <div className="flex items-center mb-4">
                     <img
                       src={post?.auth_avatar || "/placeholder.svg"}
-                      alt={post?.auth_name || 'anonymous'}
+                      alt={post?.auth_name || "anonymous"}
                       className="w-10 h-10 rounded-full cursor-pointer object-cover mr-3"
                     />
                     <div>
-                      <h3 className="font-semibold">{post?.auth_name || 'anonymous'}</h3>
+                      <h3 className="font-semibold">
+                        {post?.auth_name || "anonymous"}
+                      </h3>
                       <p className="text-gray-500 text-sm">
-                        {post?.username || 'anonymous'} • {post.createdAt ? new Date(post.createdAt).toLocaleString('USA') : 'now'}
+                        {post?.username || "anonymous"} •{" "}
+                        {post.createdAt
+                          ? new Date(post.createdAt).toLocaleString("USA")
+                          : "now"}
                       </p>
                     </div>
                   </div>
@@ -234,7 +254,7 @@ export default function CommunityPage() {
                   )}
 
                   <div className="flex justify-between text-gray-500 pt-2 border-t">
-                    <button className="flex items-center hover:text-blue-600">
+                    <button onClick={() => handleLike(post._id, post.likes)} className="flex items-center hover:text-blue-600">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
