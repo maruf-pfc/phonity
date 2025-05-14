@@ -16,33 +16,33 @@ export default function CommunityPage() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 
+  const [currentUser, setCurrentUser] = useState({})
+
   const [comments, setComments] = useState([]);
   const { user } = useSelector((state) => state.auth);
   // Sample user data
-  const currentUser = {
-    name: "Md Sohel",
-    username: "@sohel",
-    avatar:
-      "https://scontent.fdac14-1.fna.fbcdn.net/v/t39.30808-6/492399333_644063088616705_1572330640017402416_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGM4SpcDRMEDI7b5XdmZXpDcp260USidYZynbrRRKJ1hmDvegkG6-TKYoE7Rwa0aBnYzDZk7GD2_iq-S7mxbWze&_nc_ohc=g1E-Z43c1PEQ7kNvwEfDLbl&_nc_oc=Adn_e6g1uB3dVU2fQUnytVJlByfwo_coYzhQ8YriDU_t_0i_OEkcaEJrWXOdXc0yZcQ&_nc_zt=23&_nc_ht=scontent.fdac14-1.fna&_nc_gid=ffxniIeoivvk09Bk2vbiFQ&oh=00_AfIIgFqc_rc_K9eWErDV_74hdUeeISlFnzpvTqIjNkvw6A&oe=68257E74",
-    bio: "Tech enthusiast and smartphone reviewer. I love testing the latest gadgets and sharing my experiences with the community.",
-    followers: 43,
-    following: 67,
-    posts: 9,
-    joined: "January 2025",
-    location: "Dhaka, Bangladesh",
-    website: "sohel.tech",
-    interests: ["Smartphones", "Wearables", "Photography", "Gaming"],
-  };
+  // const currentUser = {
+  //   name: "Md Sohel",
+  //   username: "@sohel",
+  //   avatar:
+  //     "https://scontent.fdac14-1.fna.fbcdn.net/v/t39.30808-6/492399333_644063088616705_1572330640017402416_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGM4SpcDRMEDI7b5XdmZXpDcp260USidYZynbrRRKJ1hmDvegkG6-TKYoE7Rwa0aBnYzDZk7GD2_iq-S7mxbWze&_nc_ohc=g1E-Z43c1PEQ7kNvwEfDLbl&_nc_oc=Adn_e6g1uB3dVU2fQUnytVJlByfwo_coYzhQ8YriDU_t_0i_OEkcaEJrWXOdXc0yZcQ&_nc_zt=23&_nc_ht=scontent.fdac14-1.fna&_nc_gid=ffxniIeoivvk09Bk2vbiFQ&oh=00_AfIIgFqc_rc_K9eWErDV_74hdUeeISlFnzpvTqIjNkvw6A&oe=68257E74",
+  //   bio: "Tech enthusiast and smartphone reviewer. I love testing the latest gadgets and sharing my experiences with the community.",
+  //   followers: 43,
+  //   following: 67,
+  //   posts: 9,
+  //   joined: "January 2025",
+  //   location: "Dhaka, Bangladesh",
+  //   website: "sohel.tech",
+  //   interests: ["Smartphones", "Wearables", "Photography", "Gaming"],
+  // };
 
   useEffect(() => {
     if (!user) {
       navigate("/login");
     }
+    setCurrentUser(user)
   }, [user, navigate]);
 
-  if (user) {
-    currentUser.userId = user._id;
-  }
 
   // Sample community posts
   const [communityPosts, setCommunityPosts] = useState([]);
@@ -81,7 +81,7 @@ export default function CommunityPage() {
     if (!postContent.trim() && !selectedImage) return;
 
     const newPost = {
-      userId: currentUser.userId,
+      userId: currentUser._id,
       contents: postContent,
       image: imagePreview || null,
       likes: 0,
@@ -113,7 +113,7 @@ export default function CommunityPage() {
   const handleSubmitComment = async (e, commentsLength) => {
     e.preventDefault();
     const comment = {
-      userId: currentUser.userId,
+      userId: currentUser._id,
       postId: postId,
       content: commentContent,
       author: currentUser.name,
@@ -464,7 +464,7 @@ export default function CommunityPage() {
 
                 <div className="flex justify-center space-x-6 mt-4">
                   <div className="text-center">
-                    <p className="font-bold">{currentUser.posts}</p>
+                    <p className="font-bold">{currentUser?.posts || '0'}</p>
                     <p className="text-gray-500 text-sm">Posts</p>
                   </div>
                   <div className="text-center">
@@ -553,7 +553,7 @@ export default function CommunityPage() {
                 <div className="mt-6">
                   <h3 className="font-semibold mb-2">Interests</h3>
                   <div className="flex flex-wrap gap-2">
-                    {currentUser.interests.map((interest, index) => (
+                    {currentUser?.interests?.map((interest, index) => (
                       <span
                         key={index}
                         className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm"

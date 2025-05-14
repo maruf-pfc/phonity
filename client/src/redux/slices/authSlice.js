@@ -50,6 +50,8 @@ export const registerUser = createAsyncThunk(
         `${API_URL}/api/v1/users/register`,
         userData
       );
+
+      console.log(response.data)
       localStorage.setItem("userInfo", JSON.stringify(response.data.user));
       localStorage.setItem("userToken", response.data.token);
 
