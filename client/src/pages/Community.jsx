@@ -1,12 +1,23 @@
 "use client";
 
+import axios from "axios";
+import { useEffect } from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import CommentCard from "../components/community/CommentCard";
+const API_URL = `${import.meta.env.VITE_BACKEND_URL}`;
 
 export default function CommunityPage() {
+  const navigate = useNavigate();
+  const [postId, setPostId] = useState("");
+  const [commentContent, setCommentContent] = useState("");
   const [postContent, setPostContent] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 
+  const [comments, setComments] = useState([]);
+  const { user } = useSelector((state) => state.auth);
   // Sample user data
   const currentUser = {
     name: "Md Sohel",
@@ -23,57 +34,26 @@ export default function CommunityPage() {
     interests: ["Smartphones", "Wearables", "Photography", "Gaming"],
   };
 
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
+
+  if (user) {
+    currentUser.userId = user._id;
+  }
+
   // Sample community posts
-  const [communityPosts, setCommunityPosts] = useState([
-    {
-      id: 1,
-      user: {
-        name: "Maruf Sarker",
-        username: "@maruf",
-        avatar:
-          "https://avatars.githubusercontent.com/u/78826405?v=4",
-      },
-      content:
-        "Just got my hands on the new Phonity X Pro! The camera quality is absolutely stunning. Has anyone else tried it yet?",
-      image: "/placeholder.svg?height=300&width=500",
-      likes: 42,
-      comments: 13,
-      shares: 5,
-      time: "2 hours ago",
-    },
-    {
-      id: 2,
-      user: {
-        name: "Rajib Mondol",
-        username: "@rajib",
-        avatar:
-          "https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg",
-      },
-      content:
-        "Pro tip: If you're experiencing battery drain on your Phonity Watch, try disabling these background features. My battery now lasts 2 days instead of just 12 hours!",
-      image: null,
-      likes: 87,
-      comments: 32,
-      shares: 24,
-      time: "5 hours ago",
-    },
-    {
-      id: 3,
-      user: {
-        name: "Phonity Official",
-        username: "@phonityofficial",
-        avatar:
-          "https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?semt=ais_hybrid&w=740",
-      },
-      content:
-        "We're excited to announce our upcoming community event! Join us next Friday for an exclusive preview of our newest products. RSVP link in bio.",
-      image: "/placeholder.svg?height=300&width=500",
-      likes: 215,
-      comments: 56,
-      shares: 78,
-      time: "1 day ago",
-    },
-  ]);
+  const [communityPosts, setCommunityPosts] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${API_URL}/api/v1/community`).then((res) => {
+      const data = res.data;
+      data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      setCommunityPosts(data);
+    });
+  }, []);
 
   // Handle image selection
   const handleImageChange = (e) => {
@@ -84,6 +64,16 @@ export default function CommunityPage() {
     }
   };
 
+  // Handle Like Functionality
+  const handleLike = async (id, likes) => {
+    await axios.put(`${API_URL}/api/v1/community/${id}`, {
+      likes: likes + 1,
+    });
+    const filteredPost = communityPosts.find((post) => post._id === id);
+    filteredPost.likes = filteredPost.likes + 1;
+
+    setCommunityPosts([...communityPosts]);
+  };
   // Handle post submission
   const handleSubmitPost = (e) => {
     e.preventDefault();
@@ -91,26 +81,70 @@ export default function CommunityPage() {
     if (!postContent.trim() && !selectedImage) return;
 
     const newPost = {
-      id: Date.now(),
-      user: {
-        name: currentUser.name,
-        username: currentUser.username,
-        avatar: currentUser.avatar,
-      },
-      content: postContent,
-      image: imagePreview,
+      userId: currentUser.userId,
+      contents: postContent,
+      image: imagePreview || null,
       likes: 0,
       comments: 0,
-      shares: 0,
-      time: "Just now",
+      username: currentUser.username,
+      auth_avatar: currentUser.avatar,
+      auth_name: currentUser.name,
     };
 
-    setCommunityPosts([newPost, ...communityPosts]);
-    setPostContent("");
-    setSelectedImage(null);
-    setImagePreview(null);
+    axios
+      .post(`${API_URL}/api/v1/community`, {
+        newPost,
+      })
+      .then((res) => {
+        console.log(res.data.data);
+        newPost._id = res.data.data._id;
+        setCommunityPosts([newPost, ...communityPosts]);
+        setPostContent("");
+        setSelectedImage(null);
+        setImagePreview(null);
+      });
   };
 
+  const showCommentBox = async (postId) => {
+    await getComments(postId);
+    setPostId(postId);
+  };
+
+  const handleSubmitComment = async (e, commentsLength) => {
+    e.preventDefault();
+    const comment = {
+      userId: currentUser.userId,
+      postId: postId,
+      content: commentContent,
+      author: currentUser.name,
+      avatar: currentUser.avatar,
+    };
+    try {
+      const res = await axios.post(
+        `${API_URL}/api/v1/community/comments`,
+        comment
+      );
+      setPostId("");
+      setCommentContent("");
+      await axios.put(`${API_URL}/api/v1/community/${postId}`, {
+        comments: commentsLength + 1,
+      });
+      const filteredPost = communityPosts.find((post) => post._id === postId);
+      filteredPost.comments = filteredPost.comments + 1;
+
+      setCommunityPosts([...communityPosts])
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getComments = async (postId) => {
+    const res = await axios.get(
+      `${API_URL}/api/v1/community/comments/${postId}`
+    );
+    console.log(res.data);
+    setComments(res.data);
+  };
   return (
     <div className="bg-gray-50 min-h-screen py-8">
       <div className="container mx-auto">
@@ -120,6 +154,7 @@ export default function CommunityPage() {
 
         <div className="flex flex-col lg:flex-row gap-20 justify-between">
           {/* Left Column - Post Creation and Feed */}
+
           <div className="w-full lg:w-2/3 space-y-6">
             {/* Post Creation Section */}
             <div className="bg-white rounded-lg shadow py-6 px-4">
@@ -207,7 +242,6 @@ export default function CommunityPage() {
                         className="hidden"
                       />
                     </label>
-                    
                   </div>
                   <button
                     type="submit"
@@ -227,22 +261,30 @@ export default function CommunityPage() {
             {/* Community Feed */}
             <div className="space-y-6">
               {communityPosts.map((post) => (
-                <div key={post.id} className="bg-white rounded-lg shadow py-6 px-4">
+                <div
+                  key={post._id}
+                  className="bg-white rounded-lg shadow py-6 px-4"
+                >
                   <div className="flex items-center mb-4">
                     <img
-                      src={post.user.avatar || "/placeholder.svg"}
-                      alt={post.user.name}
+                      src={post?.auth_avatar || "/placeholder.svg"}
+                      alt={post?.auth_name || "anonymous"}
                       className="w-10 h-10 rounded-full cursor-pointer object-cover mr-3"
                     />
                     <div>
-                      <h3 className="font-semibold">{post.user.name}</h3>
+                      <h3 className="font-semibold">
+                        {post?.auth_name || "anonymous"}
+                      </h3>
                       <p className="text-gray-500 text-sm">
-                        {post.user.username} • {post.time}
+                        {post?.username || "anonymous"} •{" "}
+                        {post.createdAt
+                          ? new Date(post.createdAt).toLocaleString("USA")
+                          : "now"}
                       </p>
                     </div>
                   </div>
 
-                  <p className="mb-4">{post.content}</p>
+                  <p className="mb-4">{post.contents}</p>
 
                   {post.image && (
                     <div className="mb-4">
@@ -255,7 +297,10 @@ export default function CommunityPage() {
                   )}
 
                   <div className="flex justify-between text-gray-500 pt-2 border-t">
-                    <button className="flex items-center hover:text-blue-600">
+                    <button
+                      onClick={() => handleLike(post._id, post.likes)}
+                      className="flex items-center hover:text-blue-600"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
@@ -272,7 +317,10 @@ export default function CommunityPage() {
                       </svg>
                       <span>{post.likes}</span>
                     </button>
-                    <button className="flex items-center hover:text-blue-600">
+                    <button
+                      onClick={() => showCommentBox(post._id)}
+                      className="flex items-center hover:text-blue-600"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
@@ -289,28 +337,53 @@ export default function CommunityPage() {
                       </svg>
                       <span>{post.comments}</span>
                     </button>
-                    <button className="flex items-center hover:text-blue-600">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="mr-1"
-                      >
-                        <circle cx="18" cy="5" r="3"></circle>
-                        <circle cx="6" cy="12" r="3"></circle>
-                        <circle cx="18" cy="19" r="3"></circle>
-                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-                      </svg>
-                      <span>{post.shares}</span>
-                    </button>
                   </div>
+
+                  {/* comment box */}
+                  {post._id === postId && (
+                    <div>
+                      <div className="my-5">
+                        {comments.length > 0 &&
+                          comments.map((comment) => (
+                            <CommentCard
+                              content={comment.content}
+                              author={comment?.author || "Anonymous"}
+                              time={new Date(
+                                comment.createdAt
+                              ).toLocaleString()}
+                              avatar={
+                                comment?.avatar ||
+                                "https://t4.ftcdn.net/jpg/10/29/66/05/360_F_1029660575_DPdwknEa7hiEveRujsBmxXLfFxJM31UA.jpg"
+                              }
+                            />
+                          ))}
+                      </div>
+                      <form onSubmit={(e) => handleSubmitComment(e, comments.length)}>
+                        <div className="flex items-start my-4">
+                          <textarea
+                            value={commentContent}
+                            onChange={(e) => setCommentContent(e.target.value)}
+                            placeholder="Write a Comment..."
+                            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                            rows="3"
+                          ></textarea>
+                        </div>
+                        <div className="flex justify-end items-center">
+                          <button
+                            type="submit"
+                            className={`px-4 py-2 rounded-lg font-medium ${
+                              !commentContent.trim()
+                                ? "bg-blue-300 cursor-not-allowed"
+                                : "bg-blue-600 hover:bg-blue-700 text-white"
+                            }`}
+                            disabled={!commentContent.trim()}
+                          >
+                            Comment
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
