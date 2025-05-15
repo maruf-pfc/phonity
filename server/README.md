@@ -12,6 +12,8 @@ Phonity is a comprehensive RESTful API for an e-commerce platform with Community
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
     - [Environment Variables](#environment-variables)
+  - [Schema Diagram](#schema-diagram)
+  - [📊 Database Schema](#-database-schema)
   - [📚 API Documentation](#-api-documentation)
   - [🔌 API Endpoints](#-api-endpoints)
     - [Users](#users)
@@ -120,13 +122,170 @@ MONGO_URI=mongodb://localhost:27017/phonity
 # JWT
 
 JWT_SECRET=your_jwt_secret
-JWT_EXPIRES_IN=30d
+JWT_EXPIRES_IN=7d
 
 # Cloudinary
 
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
+```
+
+## Schema Diagram
+
+## 📊 Database Schema
+
+```mermaid
+erDiagram
+    User ||--o{ Cart : has
+    User ||--o{ Checkout : has
+    User ||--o{ Order : has
+    User ||--o{ Comment : writes
+    User ||--o{ Post : creates
+
+    Cart ||--|{ CartItem : contains
+    CartItem }o--|| Product : refers
+
+    Checkout ||--|{ CheckoutItem : includes
+    CheckoutItem }o--|| Product : refers
+
+    Order ||--|{ OrderItem : includes
+    OrderItem }o--|| Product : refers
+
+    Post ||--o{ Comment : receives
+
+    Product {
+        String name
+        String description
+        Number price
+        Number discountPrice
+        Number countInStock
+        String sku
+        String category
+        String brand
+        String[] colors
+        String[] ram
+        String[] storage
+        Object[] images
+        Boolean isFeatured
+        Boolean isPublished
+        Number rating
+        Number numReviews
+        String[] tags
+        String metaTitle
+        String metaDescription
+        String[] metaKeywords
+        Object dimensions
+        Number weight
+    }
+
+    User {
+        String name
+        String email
+        String avatar
+        Number followers
+        Number following
+        Number createdAt
+        Array interests
+        String location
+        String bio
+        String password
+        String role
+    }
+
+    Cart {
+        ObjectId user
+        String guestId
+        Number totalPrice
+    }
+
+    CartItem {
+        ObjectId productId
+        String name
+        String image
+        String price
+        String color
+        String ram
+        String storage
+        Number quantity
+    }
+
+    Checkout {
+        ObjectId user
+        Object[] checkoutItems
+        Object shippingAddress
+        String paymentMethod
+        Boolean isPaid
+        Date paidAt
+        String paymentStatus
+        Object paymentDetails
+        Boolean isFinalized
+        Date finalizedAt
+        Number totalPrice
+    }
+
+    CheckoutItem {
+        ObjectId productId
+        String name
+        String image
+        Number price
+        Number quantity
+        String color
+        String ram
+        String storage
+    }
+
+    Order {
+        ObjectId user
+        Object[] orderItems
+        Object shippingAddress
+        String paymentMethod
+        Boolean isPaid
+        Date paidAt
+        Boolean isDelivered
+        Date deliveredAt
+        String paymentStatus
+        String status
+        Number totalPrice
+    }
+
+    OrderItem {
+        ObjectId productId
+        String name
+        String image
+        Number price
+        Number quantity
+        String color
+        String ram
+        String storage
+    }
+
+    Comment {
+        ObjectId userId
+        ObjectId postId
+        ObjectId commentId
+        String content
+        Date createdAt
+        String avatar
+        String author
+    }
+
+    Post {
+        ObjectId userId
+        String contents
+        String image
+        Number likes
+        Number comments
+        Date createdAt
+        String username
+        String auth_avatar
+        String auth_name
+    }
+
+    Subscriber {
+        String email
+        Date subscribedAt
+    }
 ```
 
 ## 📚 API Documentation
