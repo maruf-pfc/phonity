@@ -24,7 +24,7 @@ const AdminSidebar = () => {
     <div className="p-6">
       <div className="mb-6">
         <Link to="/admin" className="text-xl font-bold text-white">
-          Stylique
+          Phonity
         </Link>
       </div>
 

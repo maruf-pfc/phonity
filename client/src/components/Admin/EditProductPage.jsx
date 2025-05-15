@@ -20,10 +20,9 @@ const EditProductPage = () => {
     sku: "",
     category: "",
     brand: "",
-    sizes: [],
+    storage: [],
     colors: [],
-    collections: "",
-    gender: "",
+    ram: [],
     images: [],
   });
 
@@ -80,17 +79,6 @@ const EditProductPage = () => {
     e.preventDefault();
     dispatch(updateProduct({ id, productData }));
     navigate("/admin/products");
-    // const formData = new FormData();
-    // formData.append("name", productData.name);
-    // formData.append("description", productData.description);
-    // formData.append("price", productData.price);
-    // formData.append("countInStock", productData.countInStock);
-    // formData.append("sku", productData.sku);
-    // formData.append("category", productData.category);
-    // formData.append("brand", productData.brand);
-    // formData.append("sizes", JSON.stringify(productData.sizes));
-    // formData.append("colors", JSON.stringify(productData.colors));
-    // formData.append("collections", productData.collections);
   };
 
   if (loading) {
@@ -184,20 +172,20 @@ const EditProductPage = () => {
           />
         </div>
 
-        {/* Sizes */}
+        {/* Storages */}
         <div className="mb-6">
-          <label htmlFor="sizes" className="block font-semibold mb-2">
-            Product Sizes (Comma-Separated):
+          <label htmlFor="storage" className="block font-semibold mb-2">
+            Product Storage Variants (Comma-Separated):
           </label>
           <input
             type="text"
-            name="sizes"
-            id="sizes"
-            value={productData.sizes.join(", ")}
+            name="storage"
+            id="storage"
+            value={productData.storage.join(", ")}
             onChange={(e) =>
               setProductData({
                 ...productData,
-                sizes: e.target.value.split(",").map((size) => size.trim()),
+                storage: e.target.value.split(",").map((size) => size.trim()),
               })
             }
             className="w-full border border-gray-300 rounded-md p-2"
@@ -219,6 +207,27 @@ const EditProductPage = () => {
               setProductData({
                 ...productData,
                 colors: e.target.value.split(",").map((color) => color.trim()),
+              })
+            }
+            className="w-full border border-gray-300 rounded-md p-2"
+            required
+          />
+        </div>
+
+        {/* Ram */}
+        <div className="mb-6">
+          <label htmlFor="ram" className="block font-semibold mb-2">
+            Product Ram Variant (Comma-Separated):
+          </label>
+          <input
+            type="text"
+            name="ram"
+            id="ram"
+            value={productData.ram.join(", ")}
+            onChange={(e) =>
+              setProductData({
+                ...productData,
+                ram: e.target.value.split(",").map((color) => color.trim()),
               })
             }
             className="w-full border border-gray-300 rounded-md p-2"

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import CommentCard from "../components/community/CommentCard";
+import CommentCard from "../components/Community/CommentCard";
 const API_URL = `${import.meta.env.VITE_BACKEND_URL}`;
 
 export default function CommunityPage() {
