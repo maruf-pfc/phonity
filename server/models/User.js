@@ -19,6 +19,34 @@ const userSchema = new mongoose.Schema(
         "Please enter a valid email address",
       ],
     },
+    avatar: {
+      type: String,
+      default: 'https://t4.ftcdn.net/jpg/10/29/66/05/360_F_1029660575_DPdwknEa7hiEveRujsBmxXLfFxJM31UA.jpg'
+    },
+    followers: {
+      type: Number,
+      default: 0
+    },
+    following: {
+      type: Number,
+      default: 0
+    },
+    createdAt: {
+      type: Number,
+      default: Date.now
+    },
+    interests: {
+      type: Array,
+      default: []
+    },
+    location: {
+      type: String,
+      default: "N/A"
+    },
+    bio: {
+      type: String,
+      default: "Bio is not set yet!"
+    },
     password: {
       type: String,
       required: true,
