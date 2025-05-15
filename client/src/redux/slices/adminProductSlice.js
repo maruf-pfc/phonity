@@ -40,7 +40,7 @@ export const updateProduct = createAsyncThunk(
   "adminProducts/updateProduct",
   async ({ id, productData }) => {
     const response = await axios.put(
-      `${API_URL}/api/v1/products/${id}`,
+      `${API_URL}/api/v1/products/${id}/`,
       productData,
       {
         headers: {

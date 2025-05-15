@@ -36,15 +36,58 @@ const createCheckout = async (req, res) => {
   }
 };
 
+// const updateCheckout = async (req, res) => {
+//   const { paymentStatus, paymentDetails } = req.body;
+
+//   try {
+//     const checkout = await Checkout.findOne(req.params.id);
+
+//     if (!checkout) {
+//       return res.status(404).json({ message: "Checkout not found" });
+//     }
+//     if (paymentStatus == "paid") {
+//       checkout.isPaid = true;
+//       checkout.paymentStatus = paymentStatus;
+//       checkout.paymentDetails = paymentDetails;
+//       checkout.paidAt = Date.now();
+//       await checkout.save();
+
+//       res.status(200).json({
+//         message: "Checkout updated successfully",
+//         checkout,
+//       });
+//     } else {
+//       return res.status(400).json({ message: "Invalid payment status" });
+//     }
+//   } catch (err) {
+//     console.error("Error finding checkout:", err);
+//     return res.status(500).json({
+//       message: "Internal server error",
+//       error: err.message,
+//     });
+//   }
+// };
+
 const updateCheckout = async (req, res) => {
   const { paymentStatus, paymentDetails } = req.body;
 
+  console.log("req.user._id:", req.user._id);
+  console.log("req.params.id:", req.params.id);
+  const checkout = await Checkout.findById(req.params.id);
+  console.log("checkout.user:", checkout?.user);
+
   try {
-    const checkout = await Checkout.findById(req.params.id);
+    const checkout = await Checkout.findOne({
+      _id: req.params.id,
+      user: req.user._id, // ensure only the owner can update
+    });
 
     if (!checkout) {
-      return res.status(404).json({ message: "Checkout not found" });
+      return res
+        .status(404)
+        .json({ message: "Checkout not found or not authorized" });
     }
+
     if (paymentStatus === "paid") {
       checkout.isPaid = true;
       checkout.paymentStatus = paymentStatus;
@@ -52,7 +95,7 @@ const updateCheckout = async (req, res) => {
       checkout.paidAt = Date.now();
       await checkout.save();
 
-      res.status(200).json({
+      return res.status(200).json({
         message: "Checkout updated successfully",
         checkout,
       });
@@ -60,7 +103,7 @@ const updateCheckout = async (req, res) => {
       return res.status(400).json({ message: "Invalid payment status" });
     }
   } catch (err) {
-    console.error("Error finding checkout:", err);
+    console.error("Error updating checkout:", err);
     return res.status(500).json({
       message: "Internal server error",
       error: err.message,
