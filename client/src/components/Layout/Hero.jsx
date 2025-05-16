@@ -106,7 +106,7 @@ const Hero = () => {
             <img
               src={slide.image || "/placeholder.svg"}
               alt={slide.title}
-              className="object-cover w-[100%] h-[200px] md:h-[500px]"
+              className="object-cover w-[100%] h-[100%] md:h-[500px]"
             />
             {/* <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent flex items-center">
               <div className="container mx-auto px-4">
