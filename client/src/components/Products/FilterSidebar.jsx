@@ -11,28 +11,27 @@ const FilterSidebar = () => {
     ram: [],
     color: "",
     minPrice: 0,
-    maxPrice: 100,
+    maxPrice: 10000,
   });
 
-  const [priceRange, setPriceRange] = useState([0, 100]);
+  const [priceRange, setPriceRange] = useState([0, 10000]);
 
-  const colors = ["Red", "Blue", "Green", "Black", "White", "Purple"];
   const storages = ["64GB", "128GB", "256GB"];
   const rams = ["4GB", "6GB", "8GB"];
   const brands = [
-    "Apple",
-    "Samsung",
-    "OnePlus",
-    "Xiaomi",
-    "Realme",
-    "Oppo",
-    "Vivo",
-    "Nokia",
-    "Motorola",
-    "Google",
-    "Huawei",
-    "Lenovo",
-    "Asus",
+    "apple",
+    "samsung",
+    "oneplus",
+    "xiaomi",
+    "realme",
+    "oppo",
+    "vivo",
+    "nokia",
+    "motorola",
+    "google",
+    "huawei",
+    "lenovo",
+    "asus",
   ];
 
   useEffect(() => {
@@ -40,17 +39,17 @@ const FilterSidebar = () => {
     setFilters({
       storage: params.storage ? params.storage.split(",") : [],
       ram: params.ram ? params.ram.split(",") : [],
-      color: params.color || "",
       brand: params.brand ? params.brand.split(",") : [],
       minPrice: params.minPrice || 0,
-      maxPrice: params.maxPrice || 100,
+      maxPrice: params.maxPrice || 100000,
     });
 
-    setPriceRange([params.minPrice || 0, params.maxPrice || 100]);
+    setPriceRange([params.minPrice || 0, params.maxPrice || 100000]);
   }, [searchParams]);
 
   const handleFilterChange = (e) => {
     const { name, value, type, checked } = e.target;
+
 
     let newFilters = { ...filters };
     if (type === "checkbox") {
@@ -60,7 +59,7 @@ const FilterSidebar = () => {
         newFilters[name] = newFilters[name].filter((item) => item !== value);
       }
     } else {
-      newFilters[name] = value;
+      newFilters[name] = value.toLowerCase();
     }
 
     setFilters(newFilters);
@@ -76,7 +75,6 @@ const FilterSidebar = () => {
         params.append(key, newFilters[key]);
       }
     });
-
     setSearchParams(params);
     navigate(`?${params.toString()}`);
   };
@@ -152,26 +150,7 @@ const FilterSidebar = () => {
         ))}
       </div>
 
-      {/* Color Filter */}
-      <div className="mb-6">
-        <label htmlFor="color" className="block text-gray-600 font-medium mb-2">
-          Color
-        </label>
-        <div className="flex flex-wrap gap-2">
-          {colors.map((color) => (
-            <button
-              key={color}
-              name="color"
-              value={color}
-              onClick={handleFilterChange}
-              className={`w-8 h-8 rounded-full border border-gray-300 cursor-pointer transition hover:scale-105 ${
-                filters.color === color ? "ring-2 ring-blue-500" : ""
-              }`}
-              style={{ backgroundColor: color.toLowerCase() }}
-            ></button>
-          ))}
-        </div>
-      </div>
+  
 
       {/* Price Range Filter */}
       <div className="mb-8">
@@ -184,15 +163,15 @@ const FilterSidebar = () => {
         <input
           type="range"
           name="priceRange"
-          min={0}
-          max={100}
+          min={500}
+          max={100000}
           value={priceRange[1]}
           onChange={handlePriceChange}
           className="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer"
         />
         <div className="flex justify-between text-gray-600 mt-2">
-          <span>${priceRange[0]}</span>
-          <span>${priceRange[1]}</span>
+          <span>{priceRange[0]} ৳</span>
+          <span>{priceRange[1]} ৳</span>
         </div>
       </div>
     </div>

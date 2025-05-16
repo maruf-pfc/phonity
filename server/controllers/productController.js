@@ -1,6 +1,7 @@
 const Product = require("../models/Product");
 
 const getAllProducts = async (req, res) => {
+  console.log(req.query)
   try {
     const products = await Product.find({}).populate("user", "name email");
     res.json(products);
@@ -27,6 +28,8 @@ const getAllFilteredProducts = async (req, res) => {
       brand,
       limit,
     } = req.query;
+
+    console.log(req.query)
 
     let query = {};
 
@@ -82,10 +85,12 @@ const getAllFilteredProducts = async (req, res) => {
     }
 
     // fetch products and apply sorting and limit
+    console.log(query)
     let products = await Product.find(query)
       .sort(sort)
       .limit(Number(limit) || 0);
     1;
+    console.log(products)
     res.json({
       status: "success",
       message: "Products fetched successfully",

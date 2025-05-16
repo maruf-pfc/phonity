@@ -65,7 +65,15 @@ const CollectionPage = () => {
         <SortOptions />
 
         {/* Product Grid */}
-        <ShowAllProducts products={products} loading={loading} error={error} />
+        {products.length === 0 ? (
+          <h2 className="text-4xl text-center">Not Phone Found For This Specification!</h2>
+        ) : (
+          <ShowAllProducts
+            products={products}
+            loading={loading}
+            error={error}
+          />
+        )}
       </div>
     </div>
   );
