@@ -1,285 +1,29 @@
 openapi: 3.0.0
 info:
-  title: Product Management API
-  description: API for managing products in the system
+  title: E-Commerce API
   version: 1.0.0
-
-tags:
-  - name: Products
-    description: Product management
+  description: API documentation for the e-commerce platform.
+servers:
+  - url: http://localhost:3000
+    description: Local development server
 
 paths:
-  /api/products:
-    get:
-      summary: Get all products
-      tags: [Products]
-      parameters:
-        - in: query
-          name: keyword
-          schema:
-            type: string
-          description: Search keyword
-        - in: query
-          name: pageNumber
-          schema:
-            type: integer
-          description: Page number for pagination
-      responses:
-        200:
-          description: List of products
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  products:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Product"
-                  page:
-                    type: integer
-                  pages:
-                    type: integer
-        500:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+  /upload:
     post:
-      summary: Create a new product
-      tags: [Products]
-      security:
-        - bearerAuth: [] # This indicates that a bearer token is required
+      summary: Upload an image to Cloudinary
       requestBody:
         required: true
         content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - name
-                - price
-                - description
-                - image
-                - category
-                - countInStock
-              properties:
-                name:
-                  type: string
-                  description: Product name
-                price:
-                  type: number
-                  description: Product price
-                description:
-                  type: string
-                  description: Product description
-                image:
-                  type: string
-                  description: Product image URL
-                category:
-                  type: string
-                  description: Product category
-                countInStock:
-                  type: number
-                  description: Available quantity in stock
-              example:
-                name: Sample Product
-                price: 99.99
-                description: This is a sample product
-                image: /images/sample.jpg
-                category: Electronics
-                countInStock: 10
-      responses:
-        201:
-          description: Product created successfully
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Product"
-        401:
-          description: Not authorized
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        403:
-          description: Not admin
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        500:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-
-  /api/products/filtered:
-    get:
-      summary: Get filtered products
-      tags: [Products]
-      parameters:
-        - in: query
-          name: category
-          schema:
-            type: string
-          description: Filter by category
-        - in: query
-          name: minPrice
-          schema:
-            type: number
-          description: Minimum price
-        - in: query
-          name: maxPrice
-          schema:
-            type: number
-          description: Maximum price
-        - in: query
-          name: sort
-          schema:
-            type: string
-            enum: [newest, price-low-high, price-high-low]
-          description: Sort order
-      responses:
-        200:
-          description: List of filtered products
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Product"
-        500:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-
-  /api/products/{id}:
-    get:
-      summary: Get product by ID
-      tags: [Products]
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: string
-          required: true
-          description: Product ID
-      responses:
-        200:
-          description: Product details
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Product"
-        404:
-          description: Product not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        500:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-
-    put:
-      summary: Update product
-      tags: [Products]
-      security:
-        - bearerAuth: [] # This indicates that a bearer token is required
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: string
-          required: true
-          description: Product ID
-      requestBody:
-        required: true
-        content:
-          application/json:
+          multipart/form-data:
             schema:
               type: object
               properties:
-                name:
-                  type: string
-                  description: Product name
-                price:
-                  type: number
-                  description: Product price
-                description:
-                  type: string
-                  description: Product description
                 image:
                   type: string
-                  description: Product image URL
-                category:
-                  type: string
-                  description: Product category
-                countInStock:
-                  type: number
-                  description: Available quantity in stock
-              example:
-                name: Updated Product
-                price: 89.99
-                description: This is an updated product
-                image: /images/updated.jpg
-                category: Electronics
-                countInStock: 15
+                  format: binary
       responses:
-        200:
-          description: Product updated successfully
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Product"
-        401:
-          description: Not authorized
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        403:
-          description: Not admin
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        404:
-          description: Product not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        500:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-
-    delete:
-      summary: Delete product
-      tags: [Products]
-      security:
-        - bearerAuth: [] # This indicates that a bearer token is required
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: string
-          required: true
-          description: Product ID
-      responses:
-        200:
-          description: Product deleted successfully
+        '200':
+          description: Image uploaded successfully
           content:
             application/json:
               schema:
@@ -287,60 +31,424 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: Product removed
-        401:
-          description: Not authorized
+                  imageUrl:
+                    type: string
+                  public_id:
+                    type: string
+        '400':
+          description: No file uploaded
+        '500':
+          description: Internal server error
+
+  /subscribe:
+    post:
+      summary: Subscribe a user via email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        '201':
+          description: Subscription successful
+        '400':
+          description: Invalid email or already subscribed
+        '500':
+          description: Internal server error
+
+  /products:
+    get:
+      summary: Retrieve all products
+      responses:
+        '200':
+          description: A list of products
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        403:
-          description: Not admin
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        404:
-          description: Product not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '500':
           description: Server error
+
+    post:
+      summary: Create a new product
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInput'
+      responses:
+        '201':
+          description: Product created successfully
+        '400':
+          description: Invalid input
+        '500':
+          description: Server error
+
+  /products/filtered:
+    get:
+      summary: Retrieve filtered products
+      parameters:
+        - in: query
+          name: storage
+          schema:
+            type: string
+        - in: query
+          name: color
+          schema:
+            type: string
+        - in: query
+          name: ram
+          schema:
+            type: string
+        - in: query
+          name: minPrice
+          schema:
+            type: number
+        - in: query
+          name: maxPrice
+          schema:
+            type: number
+        - in: query
+          name: sortBy
+          schema:
+            type: string
+        - in: query
+          name: search
+          schema:
+            type: string
+        - in: query
+          name: category
+          schema:
+            type: string
+        - in: query
+          name: brand
+          schema:
+            type: string
+        - in: query
+          name: limit
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Filtered products retrieved successfully
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+        '500':
+          description: Server error
+
+  /products/similar/{id}:
+    get:
+      summary: Retrieve similar products
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Similar products retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+        '404':
+          description: Product not found
+        '500':
+          description: Server error
+
+  /products/best-seller:
+    get:
+      summary: Retrieve best seller products
+      responses:
+        '200':
+          description: Best seller products retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/Product'
+        '404':
+          description: No best seller products found
+        '500':
+          description: Server error
+
+  /products/new-arrivals:
+    get:
+      summary: Retrieve new arrivals products
+      responses:
+        '200':
+          description: New arrivals products retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+        '404':
+          description: No new arrivals products found
+        '500':
+          description: Server error
+
+  /products/{id}:
+    get:
+      summary: Retrieve a product by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Product retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Product not found
+        '500':
+          description: Server error
+
+    put:
+      summary: Update a product by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInput'
+      responses:
+        '200':
+          description: Product updated successfully
+        '404':
+          description: Product not found
+        '500':
+          description: Server error
+
+    delete:
+      summary: Delete a product by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Product removed
+        '404':
+          description: Product not found
+        '500':
+          description: Server error
 
 components:
-  schemas:
-    Product:
-      type: object
-      properties:
-        name:
-          type: string
-        price:
-          type: number
-        description:
-          type: string
-        image:
-          type: string
-        category:
-          type: string
-        countInStock:
-          type: number
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
-      bearerFormat: JWT # Assuming you're using JWT tokens
+      bearerFormat: JWT
 
-security:
-  - bearerAuth: [] # This applies the bearerAuth security scheme globally to the API
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        discountPrice:
+          type: number
+        countInStock:
+          type: integer
+        sku:
+          type: string
+        category:
+          type: string
+        brand:
+          type: string
+        colors:
+          type: array
+          items:
+            type: string
+        ram:
+          type: array
+          items:
+            type: string
+        storage:
+          type: array
+          items:
+            type: string
+        images:
+          type: array
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+              altText:
+                type: string
+        isFeatured:
+          type: boolean
+        isPublished:
+          type: boolean
+        rating:
+          type: number
+        numReviews:
+          type: integer
+        tags:
+          type: array
+          items:
+            type: string
+        user:
+          type: string
+        metaTitle:
+          type: string
+        metaDescription:
+          type: string
+        metaKeywords:
+          type: array
+          items:
+            type: string
+        dimensions:
+          type: object
+          properties:
+            length:
+              type: number
+            width:
+              type: number
+            height:
+              type: number
+        weight:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    ProductInput:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        discountPrice:
+          type: number
+        countInStock:
+          type: integer
+        sku:
+          type: string
+        category:
+          type: string
+        brand:
+          type: string
+        colors:
+          type: array
+          items:
+            type: string
+        ram:
+          type: array
+          items:
+            type: string
+        storage:
+          type: array
+          items:
+            type: string
+        images:
+          type: array
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+              altText:
+                type: string
+        isFeatured:
+          type: boolean
+        isPublished:
+          type: boolean
+        tags:
+          type: array
+          items:
+            type: string
+        metaTitle:
+          type: string
+        metaDescription:
+          type: string
+        metaKeywords:
+          type: array
+          items:
+            type: string
+        dimensions:
+          type: object
+          properties:
+            length:
+              type: number
+            width:
+              type: number
+            height:
+              type: number
+        weight:
+          type: number

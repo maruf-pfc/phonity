@@ -1,16 +1,15 @@
 openapi: 3.0.0
 info:
-  title: Admin Product Management API
+  title: Admin Product API
   version: 1.0.0
-tags:
-  - name: AdminProducts
-    description: Admin product management
+  description: API for managing products by admin
 
 paths:
-  /api/admin/products:
+  /admin/products:
     get:
-      summary: Get all products (admin view)
-      tags: [AdminProducts]
+      summary: Get all products
+      tags:
+        - Admin Products
       security:
         - bearerAuth: []
       responses:
@@ -22,24 +21,76 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Product'
-        '401':
-          description: Not authorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
         '403':
-          description: Not admin
+          description: Access denied (not admin)
+    post:
+      summary: Create a new product
+      tags:
+        - Admin Products
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '201':
+          description: Product created successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Server error
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Bad request
+        '403':
+          description: Access denied (not admin)
+
+  /admin/products/{id}:
+    get:
+      summary: Get a product by ID (currently calls updateProduct in your route)
+      tags:
+        - Admin Products
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Product data
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Product not found
+        '403':
+          description: Access denied (not admin)
+
+    delete:
+      summary: Delete a product by ID
+      tags:
+        - Admin Products
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Product deleted successfully
+        '404':
+          description: Product not found
+        '403':
+          description: Access denied (not admin)
 
 components:
   securitySchemes:
@@ -52,18 +103,17 @@ components:
     Product:
       type: object
       properties:
-        id:
+        _id:
           type: string
         name:
           type: string
         price:
           type: number
-        stock:
-          type: number
+        description:
+          type: string
         category:
           type: string
-    Error:
-      type: object
-      properties:
-        message:
+        stock:
+          type: integer
+        image:
           type: string

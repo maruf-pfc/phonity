@@ -1,16 +1,15 @@
 openapi: 3.0.0
 info:
-  title: Admin Order Management API
+  title: Admin Order API
   version: 1.0.0
-tags:
-  - name: AdminOrders
-    description: Admin order management
+  description: API for managing orders by admin
 
 paths:
-  /api/admin/orders:
+  /admin/orders:
     get:
       summary: Get all orders
-      tags: [AdminOrders]
+      tags:
+        - Admin Orders
       security:
         - bearerAuth: []
       responses:
@@ -22,132 +21,65 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Order'
-        '401':
-          description: Not authorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
         '403':
-          description: Not admin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          description: Access denied (not admin)
         '500':
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          description: Internal server error
 
-  /api/admin/orders/{id}:
+  /admin/orders/{id}:
     put:
-      summary: Update order status
-      tags: [AdminOrders]
+      summary: Update order status by ID
+      tags:
+        - Admin Orders
       security:
         - bearerAuth: []
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
           required: true
           schema:
             type: string
-          description: Order ID
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
-              required:
-                - status
               properties:
                 status:
                   type: string
-                  enum: [pending, processing, shipped, delivered, cancelled]
-                  description: Order status
-              example:
-                status: shipped
+                  example: Delivered
       responses:
         '200':
-          description: Order status updated successfully
+          description: Order updated successfully
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Order'
-        '401':
-          description: Not authorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '403':
-          description: Not admin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
         '404':
           description: Order not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
         '500':
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          description: Internal server error
 
     delete:
-      summary: Delete order
-      tags: [AdminOrders]
+      summary: Delete an order by ID
+      tags:
+        - Admin Orders
       security:
         - bearerAuth: []
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
           required: true
           schema:
             type: string
-          description: Order ID
       responses:
         '200':
           description: Order deleted successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: Order removed
-        '401':
-          description: Not authorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '403':
-          description: Not admin
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
         '404':
           description: Order not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
         '500':
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          description: Internal server error
 
 components:
   securitySchemes:
@@ -160,18 +92,19 @@ components:
     Order:
       type: object
       properties:
-        id:
+        _id:
           type: string
+        user:
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
         status:
           type: string
-        items:
-          type: array
-          items:
-            type: object
-        total:
-          type: number
-    Error:
-      type: object
-      properties:
-        message:
+        isDelivered:
+          type: boolean
+        deliveredAt:
           type: string
+          format: date-time
