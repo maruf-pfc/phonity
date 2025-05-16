@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { imageUpload } from "../utils/imageUpload";
 import CommentCard from "../components/Community/CommentCard";
 const API_URL = `${import.meta.env.VITE_BACKEND_URL}`;
 
@@ -16,7 +17,7 @@ export default function CommunityPage() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 
-  const [currentUser, setCurrentUser] = useState({})
+  const [currentUser, setCurrentUser] = useState({});
 
   const [comments, setComments] = useState([]);
   const { user } = useSelector((state) => state.auth);
@@ -40,9 +41,8 @@ export default function CommunityPage() {
     if (!user) {
       navigate("/login");
     }
-    setCurrentUser(user)
+    setCurrentUser(user);
   }, [user, navigate]);
-
 
   // Sample community posts
   const [communityPosts, setCommunityPosts] = useState([]);
@@ -75,15 +75,21 @@ export default function CommunityPage() {
     setCommunityPosts([...communityPosts]);
   };
   // Handle post submission
-  const handleSubmitPost = (e) => {
+  const handleSubmitPost = async (e) => {
     e.preventDefault();
 
     if (!postContent.trim() && !selectedImage) return;
 
+    const imageRes = await imageUpload(selectedImage)
+    const imageLink = imageRes.data.display_url
+
+    console.log(imageLink)
+      
+
     const newPost = {
       userId: currentUser._id,
       contents: postContent,
-      image: imagePreview || null,
+      image: imageLink || null,
       likes: 0,
       comments: 0,
       username: currentUser.username,
@@ -120,10 +126,7 @@ export default function CommunityPage() {
       avatar: currentUser.avatar,
     };
     try {
-      await axios.post(
-        `${API_URL}/api/v1/community/comments`,
-        comment
-      );
+      await axios.post(`${API_URL}/api/v1/community/comments`, comment);
       setPostId("");
       setCommentContent("");
       await axios.put(`${API_URL}/api/v1/community/${postId}`, {
@@ -132,7 +135,7 @@ export default function CommunityPage() {
       const filteredPost = communityPosts.find((post) => post._id === postId);
       filteredPost.comments = filteredPost.comments + 1;
 
-      setCommunityPosts([...communityPosts])
+      setCommunityPosts([...communityPosts]);
     } catch (err) {
       console.log(err);
     }
@@ -358,7 +361,11 @@ export default function CommunityPage() {
                             />
                           ))}
                       </div>
-                      <form onSubmit={(e) => handleSubmitComment(e, comments.length)}>
+                      <form
+                        onSubmit={(e) =>
+                          handleSubmitComment(e, comments.length)
+                        }
+                      >
                         <div className="flex items-start my-4">
                           <textarea
                             value={commentContent}
@@ -391,7 +398,7 @@ export default function CommunityPage() {
 
           {/* Right Column - User Profile */}
           <div className="w-full lg:w-1/3 flex flex-col gap-6">
-            <div className="flex items-center flex-row">
+            {/* <div className="flex items-center flex-row">
               <div className="relative mr-4">
                 <input
                   type="text"
@@ -442,7 +449,7 @@ export default function CommunityPage() {
                   className="w-8 h-8 rounded-full cursor-pointer object-cover"
                 />
               </div>
-            </div>
+            </div> */}
             <div className="bg-white rounded-lg shadow sticky top-8">
               {/* Profile Header */}
               <div className="bg-gradient-to-r from-blue-500 to-purple-600 h-24 rounded-t-lg"></div>
@@ -464,7 +471,7 @@ export default function CommunityPage() {
 
                 <div className="flex justify-center space-x-6 mt-4">
                   <div className="text-center">
-                    <p className="font-bold">{currentUser?.posts || '0'}</p>
+                    <p className="font-bold">{currentUser?.posts || "0"}</p>
                     <p className="text-gray-500 text-sm">Posts</p>
                   </div>
                   <div className="text-center">
