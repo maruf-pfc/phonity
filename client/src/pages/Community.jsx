@@ -120,7 +120,7 @@ export default function CommunityPage() {
       avatar: currentUser.avatar,
     };
     try {
-      const res = await axios.post(
+      await axios.post(
         `${API_URL}/api/v1/community/comments`,
         comment
       );
