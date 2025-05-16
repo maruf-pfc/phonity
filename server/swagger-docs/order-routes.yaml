@@ -1,80 +1,69 @@
 openapi: 3.0.0
 info:
-  title: Order Management API
-  description: API for managing orders in the system
+  title: Order API
   version: 1.0.0
+  description: API for retrieving customer orders
 
-tags:
-  - name: Orders
-    description: Order management
+servers:
+  - url: http://localhost:5000/api
 
 paths:
-  /api/orders/my-orders:
+  /orders/my-orders:
     get:
-      summary: Get user orders
-      tags: [Orders]
+      tags:
+        - Orders
+      summary: Get orders of the logged-in customer
       security:
         - bearerAuth: []
       responses:
-        200:
-          description: List of user orders
+        '200':
+          description: Successfully fetched orders
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Order"
-        401:
-          description: Not authorized
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        500:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Orders fetched successfully
+                  orders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Order'
+        '401':
+          description: Unauthorized
 
-  /api/orders/{id}:
+  /orders/{id}:
     get:
-      summary: Get order by ID
-      tags: [Orders]
-      security:
-        - bearerAuth: []
+      tags:
+        - Orders
+      summary: Get order details by ID
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
+          required: true
           schema:
             type: string
-          required: true
-          description: Order ID
+            example: 662f08a331b207f9ccf23d33
+      security:
+        - bearerAuth: []
       responses:
-        200:
-          description: Order details
+        '200':
+          description: Successfully fetched order details
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Order"
-        401:
-          description: Not authorized
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        404:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Order details fetched successfully
+                  order:
+                    $ref: '#/components/schemas/Order'
+        '404':
           description: Order not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        500:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+        '401':
+          description: Unauthorized
 
 components:
   securitySchemes:
@@ -84,47 +73,77 @@ components:
       bearerFormat: JWT
 
   schemas:
+    OrderItem:
+      type: object
+      properties:
+        productId:
+          type: string
+        name:
+          type: string
+        image:
+          type: string
+        price:
+          type: number
+        color:
+          type: string
+        ram:
+          type: string
+        storage:
+          type: string
+        quantity:
+          type: number
+
     Order:
       type: object
       properties:
-        id:
+        _id:
           type: string
-          description: Order ID
-        userId:
-          type: string
-          description: User ID of the person who made the order
-        products:
+        user:
+          type: object
+          properties:
+            _id:
+              type: string
+            name:
+              type: string
+            email:
+              type: string
+        orderItems:
           type: array
           items:
-            type: object
-            properties:
-              productId:
-                type: string
-                description: Product ID
-              quantity:
-                type: integer
-                description: Quantity of the product
-              price:
-                type: number
-                description: Price of the product
-        totalAmount:
+            $ref: '#/components/schemas/OrderItem'
+        shippingAddress:
+          type: object
+          properties:
+            address:
+              type: string
+            city:
+              type: string
+            postalCode:
+              type: string
+            country:
+              type: string
+        paymentMethod:
+          type: string
+        totalPrice:
           type: number
-          description: Total price for the order
+        isPaid:
+          type: boolean
+        paidAt:
+          type: string
+          format: date-time
+        isDelivered:
+          type: boolean
+        deliveredAt:
+          type: string
+          format: date-time
+        paymentStatus:
+          type: string
         status:
           type: string
-          description: Status of the order (e.g., Pending, Shipped, Delivered)
+          enum: [Processing, Shipped, Delivered, Cancelled]
         createdAt:
           type: string
           format: date-time
-          description: Order creation timestamp
         updatedAt:
           type: string
           format: date-time
-          description: Last update timestamp
-
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error message

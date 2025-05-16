@@ -1,18 +1,18 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
-  title: File Upload API
-  description: API for uploading files
+  title: Image Upload API
   version: 1.0.0
+  description: Upload an image to Cloudinary using multer and streamifier.
 
-tags:
-  - name: Upload
-    description: File upload
+servers:
+  - url: http://localhost:5000/api/upload
+    description: Local development server
 
 paths:
-  /api/upload:
+  /:
     post:
       summary: Upload an image
-      tags: [Upload]
+      description: Uploads a single image file to Cloudinary and returns the image URL and public ID.
       requestBody:
         required: true
         content:
@@ -25,40 +25,40 @@ paths:
                 image:
                   type: string
                   format: binary
-                  description: Image file to upload
       responses:
-        200:
-          description: Image uploaded successfully
+        '200':
+          description: File uploaded successfully
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  url:
+                  message:
                     type: string
-                    description: URL of uploaded image
-        400:
+                    example: File uploaded successfully
+                  imageUrl:
+                    type: string
+                    example: https://res.cloudinary.com/demo/image/upload/v1234567890/sample.jpg
+                  public_id:
+                    type: string
+                    example: sample_public_id
+        '400':
           description: No file uploaded
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
-          description: Server error
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: No file uploaded
+        '500':
+          description: Internal server error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-
-components:
-  schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        code:
-          type: integer
-      example:
-        message: No file uploaded
-        code: 400
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal server error

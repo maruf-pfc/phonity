@@ -1,18 +1,18 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
-  title: Newsletter Subscription API
-  description: API for subscribing to the newsletter
+  title: Subscriber API
   version: 1.0.0
+  description: API for subscribing users via email.
 
-tags:
-  - name: Subscribers
-    description: Newsletter subscription
+servers:
+  - url: http://localhost:5000/api/subscriber
+    description: Local development server
 
 paths:
-  /api/subscribers/subscribe:
+  /subscribe:
     post:
-      summary: Subscribe to newsletter
-      tags: [Subscribers]
+      summary: Subscribe a user via email
+      description: Adds a user to the email subscription list.
       requestBody:
         required: true
         content:
@@ -25,48 +25,35 @@ paths:
                 email:
                   type: string
                   format: email
-                  description: Subscriber email
-              example:
-                email: subscriber@example.com
+                  example: user@example.com
       responses:
-        201:
-          description: Subscribed successfully
+        '201':
+          description: Subscription successful
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Subscriber"
-        400:
-          description: Invalid email or already subscribed
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Subscription successful
+        '400':
+          description: Invalid or duplicate email
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
-          description: Server error
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Email already subscribed
+        '500':
+          description: Internal server error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-
-components:
-  schemas:
-    Subscriber:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-          description: Subscriber's email address
-      example:
-        email: subscriber@example.com
-
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        code:
-          type: integer
-      example:
-        message: Invalid email or already subscribed
-        code: 400
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal server error
